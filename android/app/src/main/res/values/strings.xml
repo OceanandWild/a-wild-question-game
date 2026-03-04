@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">A Wild Question Game</string>
+    <string name="title_activity_main">A Wild Question Game</string>
+    <string name="package_name">com.oceanandwild.awqg</string>
+    <string name="custom_url_scheme">com.oceanandwild.awqg</string>
+</resources>
