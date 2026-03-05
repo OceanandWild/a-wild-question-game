@@ -1,18 +1,66 @@
 {
-  "name": "awqg-android-release",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "a-wild-question-game",
+  "version": "2026.3.5-t0015",
+  "description": "A Wild Question Game - Android and Windows",
+  "main": "main.js",
+  "author": "Ocean and Wild Studios",
+  "license": "MIT",
   "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis --publish never",
+    "android:sync": "npx cap sync android",
+    "android:build:debug": "cd android && gradlew.bat assembleDebug"
+  },
   "dependencies": {
     "@capacitor/android": "^8.1.0",
     "@capacitor/cli": "^8.1.0",
     "@capacitor/core": "^8.1.0"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.oceanandwild.awqg",
+    "detectUpdateChannel": false,
+    "productName": "A Wild Question Game",
+    "directories": {
+      "output": "C:/builds/awqg",
+      "buildResources": "build"
+    },
+    "publish": {
+      "provider": "generic",
+      "url": "https://github.com/OceanandWild/a-wild-question-game/releases/latest/download"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "build/awqgicon.ico",
+      "build/awqgicon.png"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/awqgicon.ico",
+      "executableName": "A Wild Question Game"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "A.Wild.Question.Game.Setup.${version}.exe",
+      "installerIcon": "build/awqgicon.ico",
+      "uninstallerIcon": "build/awqgicon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "A Wild Question Game"
+    }
   }
 }

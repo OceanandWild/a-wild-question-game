@@ -1,0 +1,98 @@
+name: Promote Artifact To Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "Run ID to download artifact from"
+        required: true
+        type: string
+      artifact_name:
+        description: "Artifact name"
+        required: true
+        type: string
+      release_tag:
+        description: "Release tag"
+        required: true
+        type: string
+      release_name:
+        description: "Release title"
+        required: true
+        type: string
+      release_notes:
+        description: "Release notes"
+        required: true
+        type: string
+      mark_latest:
+        description: "Mark as latest"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      prerelease:
+        description: "Publish as prerelease"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      target_repository:
+        description: "owner/repo"
+        required: false
+        default: "OceanandWild/a-wild-question-game"
+        type: string
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact from run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "${{ inputs.source_run_id }}" \
+            --repo "${{ inputs.target_repository }}" \
+            --name "${{ inputs.artifact_name }}" \
+            --dir release-assets
+
+      - name: List assets
+        run: ls -la release-assets
+
+      - name: Create or update release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          LATEST_FLAG=""
+          if [ "${{ inputs.mark_latest }}" = "true" ]; then
+            LATEST_FLAG="--latest"
+          fi
+          PRE_FLAG=""
+          if [ "${{ inputs.prerelease }}" = "true" ]; then
+            PRE_FLAG="--prerelease"
+          fi
+
+          if gh release view "${{ inputs.release_tag }}" --repo "${{ inputs.target_repository }}" >/dev/null 2>&1; then
+            gh release upload "${{ inputs.release_tag }}" release-assets/* --clobber --repo "${{ inputs.target_repository }}"
+            gh release edit "${{ inputs.release_tag }}" \
+              --title "${{ inputs.release_name }}" \
+              --notes "${{ inputs.release_notes }}" \
+              ${PRE_FLAG} \
+              --repo "${{ inputs.target_repository }}"
+            if [ "${{ inputs.mark_latest }}" = "true" ]; then
+              gh release edit "${{ inputs.release_tag }}" --latest --repo "${{ inputs.target_repository }}"
+            fi
+          else
+            gh release create "${{ inputs.release_tag }}" release-assets/* \
+              --title "${{ inputs.release_name }}" \
+              --notes "${{ inputs.release_notes }}" \
+              ${PRE_FLAG} \
+              ${LATEST_FLAG} \
+              --repo "${{ inputs.target_repository }}"
+          fi
