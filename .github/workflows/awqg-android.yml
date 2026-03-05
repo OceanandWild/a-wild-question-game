@@ -51,10 +51,15 @@ jobs:
           }
           EOF
 
+      - name: Prepare release files
+        shell: bash
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk awqg-android-debug.apk
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: awqg-apk-debug
           path: |
-            android/app/build/outputs/apk/debug/app-debug.apk
+            awqg-android-debug.apk
             android-release-metadata.json
