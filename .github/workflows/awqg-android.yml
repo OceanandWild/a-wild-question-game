@@ -41,7 +41,7 @@ jobs:
         shell: bash
         run: |
           VERSION_NAME=$(node -p "require('./package.json').version")
-          VERSION_CODE=$(date -u +%y%m%d%H%M)
+          VERSION_CODE=$(date -u +%y%m%d%H)
           cat > android-release-metadata.json <<EOF
           {
             "project_slug": "a-wild-question-game",
