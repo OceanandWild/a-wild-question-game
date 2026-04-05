@@ -525,20 +525,68 @@
         }
 
         /* Área de juego */
+        .play-shell {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .play-topbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 14px;
+            background: rgba(7, 15, 32, 0.85);
+            padding: 10px;
+        }
+
+        .play-stat {
+            min-width: 130px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .play-stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.6px;
+            color: #9bb1d4;
+            text-transform: uppercase;
+        }
+
+        .play-stat-value {
+            font-family: 'Orbitron', monospace;
+            color: #d8faff;
+            font-size: 0.95rem;
+        }
+
+        .minimal-btn {
+            margin-left: auto;
+            padding: 10px 14px;
+            font-size: 0.86rem;
+            letter-spacing: 0.5px;
+        }
+
         .game-layout {
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
-            gap: 30px;
-            margin-top: 30px;
-            min-height: 600px;
+            gap: 14px;
+            min-height: 430px;
         }
 
         .player-panel {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(0, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 14px;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .player-panel.active {
@@ -560,19 +608,65 @@
         }
 
         .question-area {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 14px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .current-question {
-            font-size: 1.4rem;
+            font-size: 1.12rem;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 12px;
             color: #fff;
             font-weight: 600;
+        }
+
+        .question-tools {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .question-search {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(0, 0, 0, 0.25);
+            color: #f3f7ff;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .question-search:focus {
+            border-color: rgba(0, 255, 255, 0.6);
+            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
+        }
+
+        .trait-filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .trait-chip {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            color: #cfe2ff;
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .trait-chip.active {
+            border-color: transparent;
+            color: #00141f;
+            background: linear-gradient(45deg, #00ffff, #83ffff);
         }
 
         .answer-buttons {
@@ -624,19 +718,35 @@
         }
 
         .question-history {
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.22);
             border-radius: 10px;
-            padding: 15px;
+            padding: 10px;
         }
 
         .question-item {
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 8px;
+            margin-bottom: 8px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             border-left: 4px solid #00ffff;
+        }
+
+        .elim-container {
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 14px;
+            background: rgba(6, 12, 26, 0.78);
+            padding: 10px;
+        }
+
+        .elim-title {
+            color: #9cefff;
+            margin-bottom: 8px;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.95rem;
+            letter-spacing: 0.4px;
         }
 
         .question-item.negative {
@@ -718,8 +828,9 @@
         .game-controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
+            gap: 12px;
+            margin-top: 14px;
+            flex-wrap: wrap;
         }
 
         .btn-secondary {
@@ -781,9 +892,16 @@
             .guide-actions {
                 justify-content: flex-start;
             }
-.game-layout {
+            .game-layout {
                 grid-template-columns: 1fr;
                 gap: 20px;
+            }
+            .play-stat {
+                min-width: calc(50% - 6px);
+            }
+            .minimal-btn {
+                margin-left: 0;
+                width: 100%;
             }
             
             .answer-buttons {
@@ -839,20 +957,20 @@
 
         /* ---- Eliminación de candidatos ---- */
 .elim-table {
-    margin: 20px auto;
+    margin: 8px auto 4px auto;
     display: grid;
-    gap: 6px;
+    gap: 5px;
     justify-content: center;
 }
 .elim-cell {
-    padding: 6px 10px;
+    padding: 5px 8px;
     border-radius: 8px;
     background: rgba(255,255,255,.08);
     border: 1px solid rgba(0,255,255,.3);
     text-align: center;
     cursor: pointer;
     transition: all .3s ease;
-    font-size: .85rem;
+    font-size: .78rem;
 }
 .elim-cell.eliminated {
     background: rgba(255,0,0,.25);
@@ -1193,19 +1311,34 @@
                         <p class="category-cta">Iniciar reto marino</p>
                     </div>
 
-                    <div id="catInvent" class="category-card" onclick="selectCategory('inventos_historicos')">
+                    <div id="catWild" class="category-card" onclick="selectCategory('animales_salvajes')">
                         <div class="category-head">
-                            <span class="category-icon">⚙️</span>
+                            <span class="category-icon">🦁</span>
                             <span class="category-badge">Dificultad alta</span>
                         </div>
-                        <h3 class="category-title">Inventos Historicos</h3>
-                        <p class="category-description">Descubre que invento representa el oponente usando preguntas sobre epoca, energia, uso principal e impacto social.</p>
+                        <h3 class="category-title">Animales Salvajes</h3>
+                        <p class="category-description">Descubre el animal secreto de tu rival investigando su habitat, dieta, velocidad, tamano y nivel de peligro.</p>
                         <div class="category-tags">
-                            <span class="category-tag">Historia</span>
-                            <span class="category-tag">Tecnologia</span>
-                            <span class="category-tag">Cultura general</span>
+                            <span class="category-tag">Fauna global</span>
+                            <span class="category-tag">Biomas</span>
+                            <span class="category-tag">Supervivencia</span>
                         </div>
-                        <p class="category-cta">Iniciar reto de inventos</p>
+                        <p class="category-cta">Iniciar reto salvaje</p>
+                    </div>
+
+                    <div id="catBiomes" class="category-card" onclick="selectCategory('biomas_extremos')">
+                        <div class="category-head">
+                            <span class="category-icon">🌎</span>
+                            <span class="category-badge">Dificultad media-alta</span>
+                        </div>
+                        <h3 class="category-title">Biomas</h3>
+                        <p class="category-description">Adivina el bioma secreto deduciendo clima, altura, humedad, vegetacion y fauna dominante.</p>
+                        <div class="category-tags">
+                            <span class="category-tag">Geografia</span>
+                            <span class="category-tag">Ecologia</span>
+                            <span class="category-tag">Ciencia natural</span>
+                        </div>
+                        <p class="category-cta">Iniciar reto de biomas</p>
                     </div>
                 </div>
 
@@ -1216,7 +1349,7 @@
                     </div>
                     <div class="howto-card">
                         <div class="howto-title">Paso 2</div>
-                        <p class="howto-text">El Jugador 2 elige uno distinto y arranca la partida por turnos.</p>
+                        <p class="howto-text">El Jugador 2 elige su personaje secreto y arranca la partida por turnos.</p>
                     </div>
                     <div class="howto-card">
                         <div class="howto-title">Paso 3</div>
@@ -1257,42 +1390,61 @@
 
         <!-- Pantalla de juego -->
         <div id="gameScreen" class="screen">
-            <div class="game-layout">
-                <!-- Tabla de eliminación -->
-<div id="elimContainer" style="text-align:center; margin-top:20px;">
-    <h3 style="color:#00ffff; margin-bottom:10px;">Candidatos posibles</h3>
-    <div id="elimTable" class="elim-table"></div>
-</div>
-                <div id="player1Panel" class="player-panel">
-                    <h3 class="player-title">Jugador 1</h3>
-                    <div id="player1Character"></div>
-                    <div class="question-history" id="player1History"></div>
+            <div class="play-shell">
+                <div class="play-topbar">
+                    <div class="play-stat">
+                        <span class="play-stat-label">Turno</span>
+                        <span id="turnHud" class="play-stat-value">Jugador 1</span>
+                    </div>
+                    <div class="play-stat">
+                        <span class="play-stat-label">Candidatos</span>
+                        <span id="candidateHud" class="play-stat-value">0</span>
+                    </div>
+                    <div class="play-stat">
+                        <span class="play-stat-label">Preguntas restantes</span>
+                        <span id="questionsHud" class="play-stat-value">1</span>
+                    </div>
+                    <button id="bestQuestionBtn" class="btn btn-secondary minimal-btn" onclick="suggestBestQuestion()">Sugerir mejor pregunta</button>
                 </div>
 
-                <div class="question-area">
-                    <div class="current-question" id="currentQuestion">
-                        Haz tu primera pregunta para adivinar el personaje de tu oponente
+                <div class="game-layout">
+                    <div id="player1Panel" class="player-panel">
+                        <h3 class="player-title">Jugador 1</h3>
+                        <div id="player1Character"></div>
+                        <div class="question-history" id="player1History"></div>
                     </div>
-                    <div class="answer-buttons" id="answerButtons" style="display: none;">
-                        <button class="btn btn-yes" onclick="answerQuestion(true)">Sí</button>
-                        <button class="btn btn-no" onclick="answerQuestion(false)">No</button>
+
+                    <div class="question-area">
+                        <div class="current-question" id="currentQuestion">
+                            Haz tu primera pregunta para adivinar el personaje de tu oponente
+                        </div>
+                        <div class="question-tools">
+                            <input id="questionSearch" class="question-search" type="text" placeholder="Buscar pregunta..." />
+                            <div id="questionTraitFilters" class="trait-filter-row"></div>
+                        </div>
+                        <div class="answer-buttons" id="answerButtons" style="display: none;">
+                            <button class="btn btn-yes" onclick="answerQuestion(true)">Sí</button>
+                            <button class="btn btn-no" onclick="answerQuestion(false)">No</button>
+                        </div>
+                        <div id="questionButtons"></div>
                     </div>
-                    <div id="questionButtons"></div>
+
+                    <div id="player2Panel" class="player-panel">
+                        <h3 class="player-title">Jugador 2</h3>
+                        <div id="player2Character"></div>
+                        <div class="question-history" id="player2History"></div>
+                    </div>
                 </div>
 
-                <div id="player2Panel" class="player-panel">
-                    <h3 class="player-title">Jugador 2</h3>
-                    <div id="player2Character"></div>
-                    <div class="question-history" id="player2History"></div>
+                <div id="elimContainer" class="elim-container">
+                    <h3 class="elim-title">Candidatos posibles</h3>
+                    <div id="elimTable" class="elim-table"></div>
                 </div>
             </div>
             <div class="game-controls">
-                <!-- ➊ Botón para saltar turno y ganar una pregunta EXTRA -->
-<div style="text-align:center;margin-top:10px">
-    <button id="skipBtn" class="btn btn-extra" onclick="skipTurnForExtra()">
-        Saltar turno → 2 preguntas el próximo turno
-    </button>
-</div>
+                <button id="skipBtn" class="btn btn-extra" onclick="skipTurnForExtra()">
+                    Saltar turno → 2 preguntas el próximo turno
+                </button>
                 <button id="endTurnBtn" class="btn" onclick="endTurn()">Terminar Turno</button>
                 <button id="guessBtn" class="btn btn-secondary" onclick="guessCharacter()">Adivinar Personaje</button>
                 <button id="backGameBtn" class="btn btn-secondary" onclick="backToMenu()">Abandonar Juego</button>
@@ -1388,24 +1540,53 @@ const gameData = {
             { id: "medusa_luna", name: "Medusa Luna", traits: { tipo: "Cnidario", habitat: "Costero", tamano: "Pequeno", dieta: "Plancton", movilidad: "Flotante", peligro: "Bajo", social: "Colonia" } },
             { id: "pez_payaso", name: "Pez Payaso", traits: { tipo: "Pez", habitat: "Arrecife", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Rapida", peligro: "Bajo", social: "Pareja" } },
             { id: "orca", name: "Orca", traits: { tipo: "Mamifero", habitat: "Oceanico", tamano: "Grande", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Alto", social: "Manada" } },
-            { id: "cangrejo", name: "Cangrejo Azul", traits: { tipo: "Crustaceo", habitat: "Costero", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Lenta", peligro: "Bajo", social: "Colonia" } }
+            { id: "cangrejo", name: "Cangrejo Azul", traits: { tipo: "Crustaceo", habitat: "Costero", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Lenta", peligro: "Bajo", social: "Colonia" } },
+            { id: "pez_espada", name: "Pez Espada", traits: { tipo: "Pez", habitat: "Oceanico", tamano: "Grande", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Alto", social: "Solitario" } },
+            { id: "morena", name: "Morena Verde", traits: { tipo: "Pez", habitat: "Arrecife", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Lenta", peligro: "Medio", social: "Solitario" } },
+            { id: "atun_rojo", name: "Atun Rojo", traits: { tipo: "Pez", habitat: "Oceanico", tamano: "Grande", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Medio", social: "Manada" } },
+            { id: "narval", name: "Narval", traits: { tipo: "Mamifero", habitat: "Polar", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Bajo", social: "Manada" } },
+            { id: "langosta", name: "Langosta Espinosa", traits: { tipo: "Crustaceo", habitat: "Arrecife", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Lenta", peligro: "Bajo", social: "Colonia" } },
+            { id: "pez_globo", name: "Pez Globo", traits: { tipo: "Pez", habitat: "Costero", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Lenta", peligro: "Medio", social: "Solitario" } },
+            { id: "calamar_gigante", name: "Calamar Gigante", traits: { tipo: "Molusco", habitat: "Oceanico", tamano: "Gigante", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Alto", social: "Solitario" } },
+            { id: "manati", name: "Manati", traits: { tipo: "Mamifero", habitat: "Costero", tamano: "Grande", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Bajo", social: "Pareja" } },
+            { id: "krill", name: "Krill Antartico", traits: { tipo: "Crustaceo", habitat: "Polar", tamano: "Pequeno", dieta: "Plancton", movilidad: "Flotante", peligro: "Bajo", social: "Colonia" } },
+            { id: "rayada", name: "Raya Aguila", traits: { tipo: "Pez", habitat: "Costero", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Medio", social: "Pareja" } }
         ]
     },
-    inventos_historicos: {
-        name: "Inventos Historicos",
+    animales_salvajes: {
+        name: "Animales Salvajes",
         characters: [
-            { id: "imprenta", name: "Imprenta Moderna", traits: { era: "Renacimiento", energia: "Manual", uso: "Comunicacion", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Infraestructura" } },
-            { id: "brujula", name: "Brujula Magnetica", traits: { era: "Antiguedad", energia: "Manual", uso: "Navegacion", portatil: "Si", estado: "Analogico", impacto: "Global", entorno: "Movilidad" } },
-            { id: "vapor", name: "Maquina de Vapor", traits: { era: "Revolucion Industrial", energia: "Combustible", uso: "Industria", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Infraestructura" } },
-            { id: "bombilla", name: "Bombilla Electrica", traits: { era: "Revolucion Industrial", energia: "Electrica", uso: "Hogar", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Hogar" } },
-            { id: "telefono", name: "Telefono", traits: { era: "Revolucion Industrial", energia: "Electrica", uso: "Comunicacion", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Hogar" } },
-            { id: "radio", name: "Radio", traits: { era: "Siglo XX", energia: "Electrica", uso: "Comunicacion", portatil: "Si", estado: "Analogico", impacto: "Global", entorno: "Hogar" } },
-            { id: "avion", name: "Avion", traits: { era: "Siglo XX", energia: "Combustible", uso: "Transporte", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Movilidad" } },
-            { id: "penicilina", name: "Penicilina", traits: { era: "Siglo XX", energia: "Biologico", uso: "Salud", portatil: "Si", estado: "Hibrido", impacto: "Global", entorno: "Laboratorio" } },
-            { id: "pc", name: "Computadora Personal", traits: { era: "Siglo XX", energia: "Electrica", uso: "Computacion", portatil: "No", estado: "Digital", impacto: "Global", entorno: "Hogar" } },
-            { id: "internet", name: "Internet", traits: { era: "Siglo XX", energia: "Red", uso: "Comunicacion", portatil: "No", estado: "Digital", impacto: "Global", entorno: "Infraestructura" } },
-            { id: "smartphone", name: "Smartphone", traits: { era: "Siglo XXI", energia: "Electrica", uso: "Comunicacion", portatil: "Si", estado: "Digital", impacto: "Global", entorno: "Movilidad" } },
-            { id: "impresora_3d", name: "Impresora 3D", traits: { era: "Siglo XXI", energia: "Electrica", uso: "Industria", portatil: "No", estado: "Digital", impacto: "Especializado", entorno: "Laboratorio" } }
+            { id: "leon", name: "Leon", traits: { tipo: "Mamifero", habitat: "Sabana", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Alto", social: "Manada" } },
+            { id: "elefante", name: "Elefante Africano", traits: { tipo: "Mamifero", habitat: "Sabana", tamano: "Gigante", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Medio", social: "Manada" } },
+            { id: "guepardo", name: "Guepardo", traits: { tipo: "Mamifero", habitat: "Sabana", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Alto", social: "Solitario" } },
+            { id: "oso_pardo", name: "Oso Pardo", traits: { tipo: "Mamifero", habitat: "Bosque", tamano: "Grande", dieta: "Omnivoro", movilidad: "Rapida", peligro: "Alto", social: "Solitario" } },
+            { id: "lobo_gris", name: "Lobo Gris", traits: { tipo: "Mamifero", habitat: "Bosque", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Medio", social: "Manada" } },
+            { id: "aguila_real", name: "Aguila Real", traits: { tipo: "Ave", habitat: "Montana", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Medio", social: "Pareja" } },
+            { id: "cobra_real", name: "Cobra Real", traits: { tipo: "Reptil", habitat: "Selva", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Alto", social: "Solitario" } },
+            { id: "gorila", name: "Gorila de Montaña", traits: { tipo: "Mamifero", habitat: "Selva", tamano: "Grande", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Medio", social: "Manada" } },
+            { id: "zorro_artico", name: "Zorro Artico", traits: { tipo: "Mamifero", habitat: "Polar", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Rapida", peligro: "Bajo", social: "Pareja" } },
+            { id: "pinguino", name: "Pinguino Emperador", traits: { tipo: "Ave", habitat: "Polar", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Lenta", peligro: "Bajo", social: "Colonia" } },
+            { id: "camello", name: "Camello", traits: { tipo: "Mamifero", habitat: "Desierto", tamano: "Grande", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Bajo", social: "Pareja" } },
+            { id: "escorpion", name: "Escorpion Dorado", traits: { tipo: "Aracnido", habitat: "Desierto", tamano: "Pequeno", dieta: "Carnivoro", movilidad: "Lenta", peligro: "Alto", social: "Solitario" } },
+            { id: "jaguar", name: "Jaguar", traits: { tipo: "Mamifero", habitat: "Selva", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Alto", social: "Solitario" } },
+            { id: "capibara", name: "Capibara", traits: { tipo: "Mamifero", habitat: "Humedal", tamano: "Mediano", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Bajo", social: "Manada" } }
+        ]
+    },
+    biomas_extremos: {
+        name: "Biomas",
+        characters: [
+            { id: "selva_tropical", name: "Selva Tropical", traits: { clima: "Calido", humedad: "Alta", vegetacion: "Densa", altitud: "Baja", agua: "Abundante", biodiversidad: "Alta", suelo: "Pobre" } },
+            { id: "desierto_calido", name: "Desierto Calido", traits: { clima: "Calido", humedad: "Baja", vegetacion: "Escasa", altitud: "Baja", agua: "Escasa", biodiversidad: "Media", suelo: "Arenoso" } },
+            { id: "tundra", name: "Tundra", traits: { clima: "Frio", humedad: "Baja", vegetacion: "Escasa", altitud: "Media", agua: "Moderada", biodiversidad: "Baja", suelo: "Congelado" } },
+            { id: "taiga", name: "Taiga Boreal", traits: { clima: "Frio", humedad: "Media", vegetacion: "Densa", altitud: "Media", agua: "Moderada", biodiversidad: "Media", suelo: "Acido" } },
+            { id: "sabana", name: "Sabana", traits: { clima: "Calido", humedad: "Media", vegetacion: "Dispersa", altitud: "Baja", agua: "Estacional", biodiversidad: "Alta", suelo: "Arcilloso" } },
+            { id: "pradera", name: "Pradera Templada", traits: { clima: "Templado", humedad: "Media", vegetacion: "Dispersa", altitud: "Baja", agua: "Moderada", biodiversidad: "Media", suelo: "Fertil" } },
+            { id: "manglar", name: "Manglar", traits: { clima: "Calido", humedad: "Alta", vegetacion: "Densa", altitud: "Baja", agua: "Salobre", biodiversidad: "Alta", suelo: "Lodoso" } },
+            { id: "arrecife", name: "Arrecife Coralino", traits: { clima: "Calido", humedad: "Alta", vegetacion: "Escasa", altitud: "Baja", agua: "Abundante", biodiversidad: "Alta", suelo: "Coralino" } },
+            { id: "bosque_nublado", name: "Bosque Nublado", traits: { clima: "Templado", humedad: "Alta", vegetacion: "Densa", altitud: "Alta", agua: "Abundante", biodiversidad: "Alta", suelo: "Humifero" } },
+            { id: "alpino", name: "Bioma Alpino", traits: { clima: "Frio", humedad: "Media", vegetacion: "Escasa", altitud: "Alta", agua: "Estacional", biodiversidad: "Baja", suelo: "Rocoso" } },
+            { id: "mediterraneo", name: "Matorral Mediterraneo", traits: { clima: "Templado", humedad: "Baja", vegetacion: "Dispersa", altitud: "Media", agua: "Estacional", biodiversidad: "Media", suelo: "Pedregoso" } },
+            { id: "pantano", name: "Pantano", traits: { clima: "Templado", humedad: "Alta", vegetacion: "Densa", altitud: "Baja", agua: "Abundante", biodiversidad: "Media", suelo: "Lodoso" } }
         ]
     }
 };
@@ -1416,45 +1597,90 @@ const questions = {
         { text: "¿Es un mamifero?", trait: "tipo", value: "Mamifero" },
         { text: "¿Es un pez?", trait: "tipo", value: "Pez" },
         { text: "¿Es un molusco?", trait: "tipo", value: "Molusco" },
+        { text: "¿Es un crustaceo?", trait: "tipo", value: "Crustaceo" },
+        { text: "¿Es un cnidario?", trait: "tipo", value: "Cnidario" },
         { text: "¿Vive en zona oceanica abierta?", trait: "habitat", value: "Oceanico" },
         { text: "¿Vive en zona costera?", trait: "habitat", value: "Costero" },
         { text: "¿Vive en arrecifes?", trait: "habitat", value: "Arrecife" },
         { text: "¿Habita regiones polares?", trait: "habitat", value: "Polar" },
         { text: "¿Es de tamaño gigante?", trait: "tamano", value: "Gigante" },
         { text: "¿Es de tamaño grande?", trait: "tamano", value: "Grande" },
+        { text: "¿Es de tamaño mediano?", trait: "tamano", value: "Mediano" },
         { text: "¿Es de tamaño pequeño?", trait: "tamano", value: "Pequeno" },
         { text: "¿Es carnivoro?", trait: "dieta", value: "Carnivoro" },
         { text: "¿Es herbivoro?", trait: "dieta", value: "Herbivoro" },
         { text: "¿Es omnivoro?", trait: "dieta", value: "Omnivoro" },
         { text: "¿Se alimenta filtrando?", trait: "dieta", value: "Filtrador" },
+        { text: "¿Se alimenta de plancton?", trait: "dieta", value: "Plancton" },
         { text: "¿Se mueve muy rapido?", trait: "movilidad", value: "Muy rapida" },
+        { text: "¿Se mueve rapido?", trait: "movilidad", value: "Rapida" },
         { text: "¿Se mueve lentamente?", trait: "movilidad", value: "Lenta" },
         { text: "¿Tiene movimiento flotante?", trait: "movilidad", value: "Flotante" },
         { text: "¿Su nivel de peligro es alto?", trait: "peligro", value: "Alto" },
+        { text: "¿Su nivel de peligro es medio?", trait: "peligro", value: "Medio" },
+        { text: "¿Su nivel de peligro es bajo?", trait: "peligro", value: "Bajo" },
         { text: "¿Suele vivir en manada?", trait: "social", value: "Manada" },
-        { text: "¿Suele vivir en colonia?", trait: "social", value: "Colonia" }
+        { text: "¿Suele vivir en colonia?", trait: "social", value: "Colonia" },
+        { text: "¿Suele vivir en pareja?", trait: "social", value: "Pareja" },
+        { text: "¿Suele vivir en solitario?", trait: "social", value: "Solitario" }
     ],
-    inventos_historicos: [
-        { text: "¿Es un invento de la antiguedad?", trait: "era", value: "Antiguedad" },
-        { text: "¿Es un invento del renacimiento?", trait: "era", value: "Renacimiento" },
-        { text: "¿Es de la revolucion industrial?", trait: "era", value: "Revolucion Industrial" },
-        { text: "¿Es un invento del siglo XX?", trait: "era", value: "Siglo XX" },
-        { text: "¿Es un invento del siglo XXI?", trait: "era", value: "Siglo XXI" },
-        { text: "¿Funciona con energia manual?", trait: "energia", value: "Manual" },
-        { text: "¿Usa energia electrica?", trait: "energia", value: "Electrica" },
-        { text: "¿Usa combustible?", trait: "energia", value: "Combustible" },
-        { text: "¿Depende de una red?", trait: "energia", value: "Red" },
-        { text: "¿Su uso principal es comunicacion?", trait: "uso", value: "Comunicacion" },
-        { text: "¿Su uso principal es transporte?", trait: "uso", value: "Transporte" },
-        { text: "¿Su uso principal es salud?", trait: "uso", value: "Salud" },
-        { text: "¿Su uso principal es computacion?", trait: "uso", value: "Computacion" },
-        { text: "¿Su uso principal es industria?", trait: "uso", value: "Industria" },
-        { text: "¿Es portatil?", trait: "portatil", value: "Si" },
-        { text: "¿Es digital?", trait: "estado", value: "Digital" },
-        { text: "¿Es analogico?", trait: "estado", value: "Analogico" },
-        { text: "¿Tiene impacto global?", trait: "impacto", value: "Global" },
-        { text: "¿Se usa principalmente en laboratorio?", trait: "entorno", value: "Laboratorio" },
-        { text: "¿Se usa principalmente en movilidad?", trait: "entorno", value: "Movilidad" }
+    animales_salvajes: [
+        { text: "¿Es un mamifero?", trait: "tipo", value: "Mamifero" },
+        { text: "¿Es un ave?", trait: "tipo", value: "Ave" },
+        { text: "¿Es un reptil?", trait: "tipo", value: "Reptil" },
+        { text: "¿Es un aracnido?", trait: "tipo", value: "Aracnido" },
+        { text: "¿Habita en la sabana?", trait: "habitat", value: "Sabana" },
+        { text: "¿Habita en bosque?", trait: "habitat", value: "Bosque" },
+        { text: "¿Habita en selva?", trait: "habitat", value: "Selva" },
+        { text: "¿Habita en zonas polares?", trait: "habitat", value: "Polar" },
+        { text: "¿Habita en desierto?", trait: "habitat", value: "Desierto" },
+        { text: "¿Habita en montana?", trait: "habitat", value: "Montana" },
+        { text: "¿Habita en humedal?", trait: "habitat", value: "Humedal" },
+        { text: "¿Es de tamano gigante?", trait: "tamano", value: "Gigante" },
+        { text: "¿Es de tamano grande?", trait: "tamano", value: "Grande" },
+        { text: "¿Es de tamano mediano?", trait: "tamano", value: "Mediano" },
+        { text: "¿Es de tamano pequeno?", trait: "tamano", value: "Pequeno" },
+        { text: "¿Es carnivoro?", trait: "dieta", value: "Carnivoro" },
+        { text: "¿Es herbivoro?", trait: "dieta", value: "Herbivoro" },
+        { text: "¿Es omnivoro?", trait: "dieta", value: "Omnivoro" },
+        { text: "¿Tiene movilidad muy rapida?", trait: "movilidad", value: "Muy rapida" },
+        { text: "¿Tiene movilidad rapida?", trait: "movilidad", value: "Rapida" },
+        { text: "¿Tiene movilidad lenta?", trait: "movilidad", value: "Lenta" },
+        { text: "¿Presenta peligro alto?", trait: "peligro", value: "Alto" },
+        { text: "¿Presenta peligro medio?", trait: "peligro", value: "Medio" },
+        { text: "¿Presenta peligro bajo?", trait: "peligro", value: "Bajo" },
+        { text: "¿Vive en manada?", trait: "social", value: "Manada" },
+        { text: "¿Vive en colonia?", trait: "social", value: "Colonia" },
+        { text: "¿Vive en pareja?", trait: "social", value: "Pareja" },
+        { text: "¿Vive en solitario?", trait: "social", value: "Solitario" }
+    ],
+    biomas_extremos: [
+        { text: "¿Tiene clima calido?", trait: "clima", value: "Calido" },
+        { text: "¿Tiene clima templado?", trait: "clima", value: "Templado" },
+        { text: "¿Tiene clima frio?", trait: "clima", value: "Frio" },
+        { text: "¿Su humedad suele ser alta?", trait: "humedad", value: "Alta" },
+        { text: "¿Su humedad suele ser media?", trait: "humedad", value: "Media" },
+        { text: "¿Su humedad suele ser baja?", trait: "humedad", value: "Baja" },
+        { text: "¿Presenta vegetacion densa?", trait: "vegetacion", value: "Densa" },
+        { text: "¿Presenta vegetacion dispersa?", trait: "vegetacion", value: "Dispersa" },
+        { text: "¿Presenta vegetacion escasa?", trait: "vegetacion", value: "Escasa" },
+        { text: "¿Se ubica en altitud baja?", trait: "altitud", value: "Baja" },
+        { text: "¿Se ubica en altitud media?", trait: "altitud", value: "Media" },
+        { text: "¿Se ubica en altitud alta?", trait: "altitud", value: "Alta" },
+        { text: "¿Tiene agua abundante?", trait: "agua", value: "Abundante" },
+        { text: "¿Tiene agua moderada?", trait: "agua", value: "Moderada" },
+        { text: "¿Tiene agua estacional?", trait: "agua", value: "Estacional" },
+        { text: "¿Tiene agua escasa?", trait: "agua", value: "Escasa" },
+        { text: "¿Tiene agua salobre?", trait: "agua", value: "Salobre" },
+        { text: "¿Su biodiversidad es alta?", trait: "biodiversidad", value: "Alta" },
+        { text: "¿Su biodiversidad es media?", trait: "biodiversidad", value: "Media" },
+        { text: "¿Su biodiversidad es baja?", trait: "biodiversidad", value: "Baja" },
+        { text: "¿El suelo es arenoso?", trait: "suelo", value: "Arenoso" },
+        { text: "¿El suelo es lodoso?", trait: "suelo", value: "Lodoso" },
+        { text: "¿El suelo es fertil?", trait: "suelo", value: "Fertil" },
+        { text: "¿El suelo es congelado?", trait: "suelo", value: "Congelado" },
+        { text: "¿El suelo es rocoso?", trait: "suelo", value: "Rocoso" },
+        { text: "¿El suelo es coralino?", trait: "suelo", value: "Coralino" }
     ]
 };
         // Estado del juego
@@ -1476,7 +1702,9 @@ let gameState = {
     forcedFinalActive: false,
     localFinalChoiceP1: null,
     localFinalChoiceP2: null,
-    localNoGuessSwitches: 0
+    localNoGuessSwitches: 0,
+    questionSearch: '',
+    traitFilter: 'all'
 };
 
 const onlineState = {
@@ -1757,6 +1985,90 @@ function getRemainingCandidateNames() {
 
 function getRemainingCandidateCount() {
     return getRemainingCandidateNames().length;
+}
+
+function getActiveCandidates() {
+    const list = gameData[gameState.currentCategory]?.characters || [];
+    const alive = new Set(getRemainingCandidateNames().map((n) => String(n).toLowerCase()));
+    if (!alive.size) return list;
+    return list.filter((ch) => alive.has(String(ch.name).toLowerCase()));
+}
+
+function updateMinimalHud() {
+    const turnEl = document.getElementById('turnHud');
+    const candEl = document.getElementById('candidateHud');
+    const qEl = document.getElementById('questionsHud');
+    if (turnEl) turnEl.textContent = `Jugador ${gameState.currentPlayer}`;
+    if (candEl) candEl.textContent = String(getRemainingCandidateCount());
+    if (qEl) qEl.textContent = String(gameState.questionsLeftThisTurn ?? 1);
+}
+
+function getDistinctTraitsForCategory() {
+    const categoryChars = gameData[gameState.currentCategory]?.characters || [];
+    const set = new Set();
+    categoryChars.forEach((ch) => {
+        Object.keys(ch.traits || {}).forEach((trait) => set.add(trait));
+    });
+    return Array.from(set);
+}
+
+function renderTraitFilters() {
+    const row = document.getElementById('questionTraitFilters');
+    if (!row) return;
+    row.innerHTML = '';
+    const traitOptions = ['all', ...getDistinctTraitsForCategory()];
+    traitOptions.forEach((trait) => {
+        const btn = document.createElement('button');
+        btn.className = `trait-chip ${gameState.traitFilter === trait ? 'active' : ''}`;
+        btn.type = 'button';
+        btn.textContent = trait === 'all' ? 'Todas' : trait;
+        btn.onclick = () => {
+            gameState.traitFilter = trait;
+            generateQuestionButtons();
+            renderTraitFilters();
+        };
+        row.appendChild(btn);
+    });
+}
+
+function getFilteredQuestions() {
+    const search = String(gameState.questionSearch || '').trim().toLowerCase();
+    return gameState.availableQuestions.filter((q) => {
+        const traitOk = gameState.traitFilter === 'all' || q.trait === gameState.traitFilter;
+        if (!traitOk) return false;
+        if (!search) return true;
+        return String(q.text).toLowerCase().includes(search) || String(q.trait).toLowerCase().includes(search) || String(q.value).toLowerCase().includes(search);
+    });
+}
+
+function scoreQuestionForCandidates(question, candidates) {
+    if (!Array.isArray(candidates) || !candidates.length) return -1;
+    const yesCount = candidates.filter((c) => c.traits?.[question.trait] === question.value).length;
+    const noCount = candidates.length - yesCount;
+    if (!yesCount || !noCount) return 0.1;
+    const balance = 1 - Math.abs(yesCount - noCount) / candidates.length;
+    return balance;
+}
+
+function suggestBestQuestion() {
+    const candidates = getActiveCandidates();
+    const pool = getFilteredQuestions();
+    if (!pool.length) {
+        showEventToast('No hay preguntas disponibles para sugerir.', 'Asistente');
+        return;
+    }
+    let best = null;
+    let bestScore = -1;
+    pool.forEach((q) => {
+        const score = scoreQuestionForCandidates(q, candidates);
+        if (score > bestScore) {
+            bestScore = score;
+            best = q;
+        }
+    });
+    if (!best) return;
+    document.getElementById('currentQuestion').textContent = `Sugerencia táctica: ${best.text}`;
+    showEventToast('Sugerencia lista: usa una pregunta que mejor divide candidatos.', 'Asistente');
 }
 
 function showFinalBanner(title, text, duration = 2600) {
@@ -2094,7 +2406,7 @@ function updateActionLocks() {
     if (ultraBtn) ultraBtn.textContent = `Ultra guiado: ${gameState.ultraGuided ? 'ON' : 'OFF'}`;
 
     if (!gameState.ultraGuided) {
-        ['skipBtn', 'endTurnBtn', 'guessBtn', 'backGameBtn', 'backSelectionBtn'].forEach(id => setButtonLock(id, true));
+        ['skipBtn', 'endTurnBtn', 'guessBtn', 'backGameBtn', 'backSelectionBtn', 'bestQuestionBtn'].forEach(id => setButtonLock(id, true));
         return;
     }
 
@@ -2107,6 +2419,7 @@ function updateActionLocks() {
 
     setButtonLock('backSelectionBtn', inSelection, 'Disponible en fase de selección.');
     setButtonLock('backGameBtn', inPlaying, 'Disponible durante la partida.');
+    setButtonLock('bestQuestionBtn', inPlaying && !lockedByFinal && myTurn && !answering, 'Disponible durante tu turno de preguntas.');
     setButtonLock('skipBtn', inPlaying && !lockedByFinal && myTurn && !answering && gameState.questionsLeftThisTurn > 0, 'Primero termina de responder la pregunta activa.');
     setButtonLock('endTurnBtn', inPlaying && !lockedByFinal && myTurn && !answering, 'Solo el jugador de turno puede terminarlo.');
     setButtonLock('guessBtn', inPlaying && !lockedByFinal && myTurn && !answering && hasAsked, 'Haz al menos una pregunta antes de adivinar.');
@@ -2382,7 +2695,7 @@ function selectCharacter(character) {
     /* 1er clic – Jugador 1 elige **el personaje que deberá adivinar el Jugador 2** */
     if (gameState.selectionPhase === 1) {
         gameState.player1Character = character;   // ← secreto de P2 (objetivo de P1)
-        showEventToast(`Jugador 1 eligió: ${character.name}.`, 'Selección');
+        showEventToast('Personaje de Jugador 1 guardado.', 'Selección');
         showReminder(
             "Antes de que el Jugador 2 elija, recuerda los rasgos de tu elección:",
             character
@@ -2396,12 +2709,8 @@ function selectCharacter(character) {
 
     /* 2º clic – Jugador 2 elige **el personaje que deberá adivinar el Jugador 1** */
     if (gameState.selectionPhase === 2) {
-        if (character.id === gameState.player1Character.id) {
-            uiAlert('Por favor selecciona un personaje diferente al que eligió el Jugador 1', 'Selección inválida');
-            return;
-        }
         gameState.player2Character = character;   // ← secreto de P1 (objetivo de P2)
-        showEventToast(`Jugador 2 eligió: ${character.name}.`, 'Selección');
+        showEventToast('Personaje de Jugador 2 guardado.', 'Selección');
         showReminder(
             "Antes de comenzar el juego, recuerda los rasgos de tu elección:",
             character
@@ -2424,12 +2733,14 @@ function renderElimTable() {
         cell.onclick = () => toggleCell(cell);
         cont.appendChild(cell);
     });
+    updateMinimalHud();
 }
 
 function toggleCell(cell){
     const flag = cell.dataset.elim === '1';
     cell.dataset.elim = flag ? '0' : '1';
     cell.classList.toggle('eliminated', !flag);
+    updateMinimalHud();
 }
 
 function eliminateByTrait(trait, value, answer){
@@ -2445,6 +2756,7 @@ function eliminateByTrait(trait, value, answer){
                     cell.classList.add('eliminated');
                     cell.dataset.elim = '1';
                     cell.classList.remove('shake');
+                    updateMinimalHud();
                 }, 300);
             }
         }
@@ -2469,6 +2781,7 @@ function autoEliminateForAsker(trait, value, answer){
                     cell.classList.add('eliminated');
                     cell.dataset.elim = '1';
                     cell.classList.remove('shake');
+                    updateMinimalHud();
                 }, 300);
             }
         }
@@ -2492,6 +2805,8 @@ function updateQuestionCountBadge(){
         document.querySelector('.current-question').appendChild(badge);
     }
     badge.textContent = `(${gameState.questionsLeftThisTurn})`;
+    const hud = document.getElementById('questionsHud');
+    if (hud) hud.textContent = String(gameState.questionsLeftThisTurn ?? 1);
 }
 
 /* ---- SALTAR TURNO ---- */
@@ -2522,6 +2837,8 @@ function startGame() {
     gameState.currentPlayer = 1;
     gameState.availableQuestions = [...questions[gameState.currentCategory]];
     gameState.questionsLeftThisTurn = 1; updateQuestionCountBadge();
+    gameState.questionSearch = '';
+    gameState.traitFilter = 'all';
     
     // Mezclar preguntas
     for (let i = gameState.availableQuestions.length - 1; i > 0; i--) {
@@ -2532,9 +2849,13 @@ function startGame() {
     showScreen('gameScreen');
     updateGameDisplay();
     document.getElementById('currentQuestion').textContent = 'Turno del Jugador 1: elige una pregunta para empezar.';
+    const searchInput = document.getElementById('questionSearch');
+    if (searchInput) searchInput.value = '';
     
     generateQuestionButtons();
     renderElimTable();
+    renderTraitFilters();
+    updateMinimalHud();
     updateGuidePanel();
     showEventToast('Comienza el juego. Jugador 1 abre la ronda.', 'Inicio');
 }
@@ -2584,31 +2905,34 @@ if (gameState.player2Character) {
 
     // Actualizar historial de preguntas
     updateQuestionHistory();
+    updateMinimalHud();
 }
 
 function generateQuestionButtons() {
     const container = document.getElementById('questionButtons');
-    container.innerHTML = '<h3 style="text-align: center; margin-bottom: 20px; color: #00ffff;">Elige una pregunta:</h3>';
+    container.innerHTML = '<h3 style="text-align: center; margin-bottom: 12px; color: #9defff; font-size:1rem;">Banco de preguntas</h3>';
     
     const grid = document.createElement('div');
-    grid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;';
+    grid.style.cssText = 'display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 9px;';
     
-    // Mostrar las primeras 6 preguntas disponibles
-    const questionsToShow = gameState.availableQuestions.slice(0, 6);
+    const filtered = getFilteredQuestions();
+    const questionsToShow = filtered.slice(0, 8);
     if (!questionsToShow.length) {
-        container.innerHTML += '<p style="text-align:center;color:#b9c8eb;">No quedan preguntas disponibles. Puedes intentar adivinar o terminar turno.</p>';
+        container.innerHTML += '<p style="text-align:center;color:#b9c8eb;">No hay resultados con ese filtro. Prueba limpiar búsqueda o cambiar rasgo.</p>';
         return;
     }
     
-    questionsToShow.forEach((question, index) => {
+    questionsToShow.forEach((question) => {
+        const absoluteIndex = gameState.availableQuestions.indexOf(question);
         const button = document.createElement('button');
         button.className = 'btn btn-secondary';
-        button.style.cssText = 'font-size: 0.9rem; padding: 10px 15px; text-align: left; text-transform: none;';
-        button.textContent = question.text;
-        button.onclick = () => askQuestion(question, index);
+        button.style.cssText = 'font-size: 0.88rem; padding: 10px 11px; text-align: left; text-transform: none; border-radius:12px;';
+        button.innerHTML = `<strong style="display:block;color:#d8faff;margin-bottom:3px;">${question.text}</strong><span style="font-size:0.75rem;opacity:0.85;">${question.trait}: ${question.value}</span>`;
+        button.onclick = () => askQuestion(question, absoluteIndex);
         grid.appendChild(button);
     });
     updateQuestionCountBadge();
+    updateMinimalHud();
     
     container.appendChild(grid);
 }
@@ -2625,7 +2949,7 @@ function askQuestion(question, questionIndex) {
         gameState.currentQuestion = question;
         document.getElementById('currentQuestion').textContent = question.text;
         document.getElementById('questionButtons').style.display = 'none';
-        gameState.availableQuestions.splice(questionIndex, 1);
+        if (questionIndex >= 0) gameState.availableQuestions.splice(questionIndex, 1);
         socket.emit('awqg:ask-question', { code: onlineState.roomCode, question });
         updateActionLocks();
         return;
@@ -2640,7 +2964,7 @@ function askQuestion(question, questionIndex) {
     updateActionLocks();
     
     // Remover la pregunta de las disponibles
-    gameState.availableQuestions.splice(questionIndex, 1);
+    if (questionIndex >= 0) gameState.availableQuestions.splice(questionIndex, 1);
 }
 
 function answerQuestion(answer) {
@@ -2681,6 +3005,7 @@ autoEliminateForAsker(question.trait, question.value, answer);
     consumeQuestion();             // consume la pregunta
     maybeSuggestRiskFromCandidates();
     maybeTriggerForcedFinal();
+    updateMinimalHud();
     updateGuidePanel();
     }, 2000);
 }
@@ -2792,6 +3117,7 @@ function endTurn() {
         updateGameDisplay();          // oculta/muestra paneles
         generateQuestionButtons();    // regenera botones
         updateQuestionCountBadge();   // muestra (1) o (2)
+        updateMinimalHud();
         document.getElementById('currentQuestion').textContent = `Turno del Jugador ${gameState.currentPlayer}: elige tu pregunta.`;
         updateGuidePanel();
         if ((gameState.localNoGuessSwitches || 0) >= 6) {
@@ -2806,6 +3132,7 @@ function startTurn() {
     document.getElementById('currentQuestion').textContent = 'Elige tu primera pregunta...';
     document.getElementById('questionButtons').style.display = 'block';
     generateQuestionButtons();
+    updateMinimalHud();
     updateGuidePanel();
 }
 
@@ -2884,7 +3211,9 @@ function resetGame() {
         forcedFinalActive: false,
         localFinalChoiceP1: null,
         localFinalChoiceP2: null,
-        localNoGuessSwitches: 0
+        localNoGuessSwitches: 0,
+        questionSearch: '',
+        traitFilter: 'all'
     };
 }
 
@@ -2932,6 +3261,14 @@ document.addEventListener('DOMContentLoaded', function() {
     updateActionLocks();
     showEventToast('Selecciona una categoría para comenzar.', 'Guía');
     refreshWaitingRooms();
+
+    const searchInput = document.getElementById('questionSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            gameState.questionSearch = e.target.value || '';
+            if (gameState.gamePhase === 'playing') generateQuestionButtons();
+        });
+    }
 });
 
 // Prevenir que el jugador vea la pantalla del oponente
