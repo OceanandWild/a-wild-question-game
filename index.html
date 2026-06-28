@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://owsdatabase.onrender.com/socket.io/socket.io.js"></script>
-    <script src="https://owsdatabase.onrender.com/shared/ows-project-guard.js"></script>
     <style>
         * {
             margin: 0;
@@ -418,64 +417,6 @@
             font-size: 1.8rem;
             letter-spacing: 3px;
         }
-
-        .final-banner {
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: min(900px, calc(100vw - 24px));
-            border-radius: 16px;
-            border: 2px solid rgba(0,255,255,.8);
-            background:
-              linear-gradient(120deg, rgba(0,255,255,.14), rgba(255,0,255,.1)),
-              rgba(5,10,24,.96);
-            box-shadow: 0 25px 55px rgba(0,0,0,.45), 0 0 22px rgba(0,255,255,.28);
-            padding: 18px 20px;
-            z-index: 3500;
-            display: none;
-        }
-        .final-banner.active { display: block; }
-        .final-banner-title {
-            font-family: 'Orbitron', monospace;
-            color: #91fff1;
-            font-size: 1.15rem;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-        .final-banner-text {
-            color: #d4e8ff;
-            font-size: 1rem;
-            line-height: 1.45;
-        }
-        .suspense-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,.86);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 3600;
-        }
-        .suspense-overlay.active { display: flex; }
-        .suspense-card {
-            width: min(760px, calc(100vw - 24px));
-            border: 1px solid rgba(255,255,255,.2);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            background: rgba(7,13,30,.95);
-        }
-        .suspense-title {
-            font-family: 'Orbitron', monospace;
-            color: #fff36d;
-            font-size: 1.25rem;
-            margin-bottom: 8px;
-        }
-        .suspense-text {
-            color: #dbe7ff;
-            font-size: 1rem;
-        }
 /* Selección de personajes */
         .character-grid {
             display: grid;
@@ -526,68 +467,20 @@
         }
 
         /* Área de juego */
-        .play-shell {
-            margin-top: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .play-topbar {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 14px;
-            background: rgba(7, 15, 32, 0.85);
-            padding: 10px;
-        }
-
-        .play-stat {
-            min-width: 130px;
-            padding: 8px 10px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            background: rgba(255, 255, 255, 0.03);
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .play-stat-label {
-            font-size: 0.7rem;
-            letter-spacing: 0.6px;
-            color: #9bb1d4;
-            text-transform: uppercase;
-        }
-
-        .play-stat-value {
-            font-family: 'Orbitron', monospace;
-            color: #d8faff;
-            font-size: 0.95rem;
-        }
-
-        .minimal-btn {
-            margin-left: auto;
-            padding: 10px 14px;
-            font-size: 0.86rem;
-            letter-spacing: 0.5px;
-        }
-
         .game-layout {
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
-            gap: 14px;
-            min-height: 430px;
+            gap: 30px;
+            margin-top: 30px;
+            min-height: 600px;
         }
 
         .player-panel {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            padding: 14px;
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 255, 255, 0.2);
         }
 
         .player-panel.active {
@@ -609,65 +502,19 @@
         }
 
         .question-area {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            padding: 14px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .current-question {
-            font-size: 1.12rem;
+            font-size: 1.4rem;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 30px;
             color: #fff;
             font-weight: 600;
-        }
-
-        .question-tools {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .question-search {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            background: rgba(0, 0, 0, 0.25);
-            color: #f3f7ff;
-            padding: 10px 12px;
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        .question-search:focus {
-            border-color: rgba(0, 255, 255, 0.6);
-            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
-        }
-
-        .trait-filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .trait-chip {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.03);
-            color: #cfe2ff;
-            border-radius: 999px;
-            padding: 5px 10px;
-            font-size: 0.76rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .trait-chip.active {
-            border-color: transparent;
-            color: #00141f;
-            background: linear-gradient(45deg, #00ffff, #83ffff);
         }
 
         .answer-buttons {
@@ -719,35 +566,19 @@
         }
 
         .question-history {
-            max-height: 250px;
+            max-height: 300px;
             overflow-y: auto;
-            background: rgba(0, 0, 0, 0.22);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
-            padding: 10px;
+            padding: 15px;
         }
 
         .question-item {
-            padding: 8px;
-            margin-bottom: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             border-left: 4px solid #00ffff;
-        }
-
-        .elim-container {
-            text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 14px;
-            background: rgba(6, 12, 26, 0.78);
-            padding: 10px;
-        }
-
-        .elim-title {
-            color: #9cefff;
-            margin-bottom: 8px;
-            font-family: 'Orbitron', monospace;
-            font-size: 0.95rem;
-            letter-spacing: 0.4px;
         }
 
         .question-item.negative {
@@ -829,9 +660,8 @@
         .game-controls {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 14px;
-            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
         }
 
         .btn-secondary {
@@ -893,16 +723,9 @@
             .guide-actions {
                 justify-content: flex-start;
             }
-            .game-layout {
+.game-layout {
                 grid-template-columns: 1fr;
                 gap: 20px;
-            }
-            .play-stat {
-                min-width: calc(50% - 6px);
-            }
-            .minimal-btn {
-                margin-left: 0;
-                width: 100%;
             }
             
             .answer-buttons {
@@ -958,20 +781,20 @@
 
         /* ---- Eliminación de candidatos ---- */
 .elim-table {
-    margin: 8px auto 4px auto;
+    margin: 20px auto;
     display: grid;
-    gap: 5px;
+    gap: 6px;
     justify-content: center;
 }
 .elim-cell {
-    padding: 5px 8px;
+    padding: 6px 10px;
     border-radius: 8px;
     background: rgba(255,255,255,.08);
     border: 1px solid rgba(0,255,255,.3);
     text-align: center;
     cursor: pointer;
     transition: all .3s ease;
-    font-size: .78rem;
+    font-size: .85rem;
 }
 .elim-cell.eliminated {
     background: rgba(255,0,0,.25);
@@ -1093,17 +916,6 @@
     margin-bottom: 14px;
 }
 .ui-modal-input {
-    width: 100%;
-    border: 1px solid rgba(255,255,255,.2);
-    background: rgba(0,0,0,.35);
-    color: #fff;
-    border-radius: 10px;
-    padding: 10px 12px;
-    margin-bottom: 14px;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.05rem;
-}
-.ui-modal-select {
     width: 100%;
     border: 1px solid rgba(255,255,255,.2);
     background: rgba(0,0,0,.35);
@@ -1312,34 +1124,19 @@
                         <p class="category-cta">Iniciar reto marino</p>
                     </div>
 
-                    <div id="catWild" class="category-card" onclick="selectCategory('animales_salvajes')">
+                    <div id="catInvent" class="category-card" onclick="selectCategory('inventos_historicos')">
                         <div class="category-head">
-                            <span class="category-icon">🦁</span>
+                            <span class="category-icon">⚙️</span>
                             <span class="category-badge">Dificultad alta</span>
                         </div>
-                        <h3 class="category-title">Animales Salvajes</h3>
-                        <p class="category-description">Descubre el animal secreto de tu rival investigando su habitat, dieta, velocidad, tamano y nivel de peligro.</p>
+                        <h3 class="category-title">Inventos Historicos</h3>
+                        <p class="category-description">Descubre que invento representa el oponente usando preguntas sobre epoca, energia, uso principal e impacto social.</p>
                         <div class="category-tags">
-                            <span class="category-tag">Fauna global</span>
-                            <span class="category-tag">Biomas</span>
-                            <span class="category-tag">Supervivencia</span>
+                            <span class="category-tag">Historia</span>
+                            <span class="category-tag">Tecnologia</span>
+                            <span class="category-tag">Cultura general</span>
                         </div>
-                        <p class="category-cta">Iniciar reto salvaje</p>
-                    </div>
-
-                    <div id="catBiomes" class="category-card" onclick="selectCategory('biomas_extremos')">
-                        <div class="category-head">
-                            <span class="category-icon">🌎</span>
-                            <span class="category-badge">Dificultad media-alta</span>
-                        </div>
-                        <h3 class="category-title">Biomas</h3>
-                        <p class="category-description">Adivina el bioma secreto deduciendo clima, altura, humedad, vegetacion y fauna dominante.</p>
-                        <div class="category-tags">
-                            <span class="category-tag">Geografia</span>
-                            <span class="category-tag">Ecologia</span>
-                            <span class="category-tag">Ciencia natural</span>
-                        </div>
-                        <p class="category-cta">Iniciar reto de biomas</p>
+                        <p class="category-cta">Iniciar reto de inventos</p>
                     </div>
                 </div>
 
@@ -1350,7 +1147,7 @@
                     </div>
                     <div class="howto-card">
                         <div class="howto-title">Paso 2</div>
-                        <p class="howto-text">El Jugador 2 elige su personaje secreto y arranca la partida por turnos.</p>
+                        <p class="howto-text">El Jugador 2 elige uno distinto y arranca la partida por turnos.</p>
                     </div>
                     <div class="howto-card">
                         <div class="howto-title">Paso 3</div>
@@ -1391,61 +1188,42 @@
 
         <!-- Pantalla de juego -->
         <div id="gameScreen" class="screen">
-            <div class="play-shell">
-                <div class="play-topbar">
-                    <div class="play-stat">
-                        <span class="play-stat-label">Turno</span>
-                        <span id="turnHud" class="play-stat-value">Jugador 1</span>
-                    </div>
-                    <div class="play-stat">
-                        <span class="play-stat-label">Candidatos</span>
-                        <span id="candidateHud" class="play-stat-value">0</span>
-                    </div>
-                    <div class="play-stat">
-                        <span class="play-stat-label">Preguntas restantes</span>
-                        <span id="questionsHud" class="play-stat-value">1</span>
-                    </div>
-                    <button id="bestQuestionBtn" class="btn btn-secondary minimal-btn" onclick="suggestBestQuestion()">Sugerir mejor pregunta</button>
+            <div class="game-layout">
+                <!-- Tabla de eliminación -->
+<div id="elimContainer" style="text-align:center; margin-top:20px;">
+    <h3 style="color:#00ffff; margin-bottom:10px;">Candidatos posibles</h3>
+    <div id="elimTable" class="elim-table"></div>
+</div>
+                <div id="player1Panel" class="player-panel">
+                    <h3 class="player-title">Jugador 1</h3>
+                    <div id="player1Character"></div>
+                    <div class="question-history" id="player1History"></div>
                 </div>
 
-                <div class="game-layout">
-                    <div id="player1Panel" class="player-panel">
-                        <h3 class="player-title">Jugador 1</h3>
-                        <div id="player1Character"></div>
-                        <div class="question-history" id="player1History"></div>
+                <div class="question-area">
+                    <div class="current-question" id="currentQuestion">
+                        Haz tu primera pregunta para adivinar el personaje de tu oponente
                     </div>
-
-                    <div class="question-area">
-                        <div class="current-question" id="currentQuestion">
-                            Haz tu primera pregunta para adivinar el personaje de tu oponente
-                        </div>
-                        <div class="question-tools">
-                            <input id="questionSearch" class="question-search" type="text" placeholder="Buscar pregunta..." />
-                            <div id="questionTraitFilters" class="trait-filter-row"></div>
-                        </div>
-                        <div class="answer-buttons" id="answerButtons" style="display: none;">
-                            <button class="btn btn-yes" onclick="answerQuestion(true)">Sí</button>
-                            <button class="btn btn-no" onclick="answerQuestion(false)">No</button>
-                        </div>
-                        <div id="questionButtons"></div>
+                    <div class="answer-buttons" id="answerButtons" style="display: none;">
+                        <button class="btn btn-yes" onclick="answerQuestion(true)">Sí</button>
+                        <button class="btn btn-no" onclick="answerQuestion(false)">No</button>
                     </div>
-
-                    <div id="player2Panel" class="player-panel">
-                        <h3 class="player-title">Jugador 2</h3>
-                        <div id="player2Character"></div>
-                        <div class="question-history" id="player2History"></div>
-                    </div>
+                    <div id="questionButtons"></div>
                 </div>
 
-                <div id="elimContainer" class="elim-container">
-                    <h3 class="elim-title">Candidatos posibles</h3>
-                    <div id="elimTable" class="elim-table"></div>
+                <div id="player2Panel" class="player-panel">
+                    <h3 class="player-title">Jugador 2</h3>
+                    <div id="player2Character"></div>
+                    <div class="question-history" id="player2History"></div>
                 </div>
             </div>
             <div class="game-controls">
-                <button id="skipBtn" class="btn btn-extra" onclick="skipTurnForExtra()">
-                    Saltar turno → 2 preguntas el próximo turno
-                </button>
+                <!-- ➊ Botón para saltar turno y ganar una pregunta EXTRA -->
+<div style="text-align:center;margin-top:10px">
+    <button id="skipBtn" class="btn btn-extra" onclick="skipTurnForExtra()">
+        Saltar turno → 2 preguntas el próximo turno
+    </button>
+</div>
                 <button id="endTurnBtn" class="btn" onclick="endTurn()">Terminar Turno</button>
                 <button id="guessBtn" class="btn btn-secondary" onclick="guessCharacter()">Adivinar Personaje</button>
                 <button id="backGameBtn" class="btn btn-secondary" onclick="backToMenu()">Abandonar Juego</button>
@@ -1485,23 +1263,12 @@
             <button class="btn btn-secondary" style="padding:10px 16px;" onclick="closeWaitOverlay()">Cerrar</button>
         </div>
     </div>
-    <div id="finalBanner" class="final-banner" aria-hidden="true">
-        <div class="final-banner-title" id="finalBannerTitle">PROTOCOLO: DECISIÓN FINAL</div>
-        <div class="final-banner-text" id="finalBannerText">Usen todo lo que saben. Es momento de decidir.</div>
-    </div>
-    <div id="suspenseOverlay" class="suspense-overlay" aria-hidden="true">
-        <div class="suspense-card">
-            <div id="suspenseTitle" class="suspense-title">Calculando veredicto final...</div>
-            <div id="suspenseText" class="suspense-text">Preparando resultados.</div>
-        </div>
-    </div>
 
     <div id="uiModal" class="ui-modal" aria-hidden="true">
         <div class="ui-modal-card">
             <div id="uiModalTitle" class="ui-modal-title">Mensaje</div>
             <div id="uiModalMessage" class="ui-modal-message"></div>
             <input id="uiModalInput" class="ui-modal-input" type="text" style="display:none;">
-            <select id="uiModalSelect" class="ui-modal-select" style="display:none;"></select>
             <div class="ui-modal-actions">
                 <button id="uiModalCancel" class="ui-btn cancel">Cancelar</button>
                 <button id="uiModalOk" class="ui-btn ok">Aceptar</button>
@@ -1524,14 +1291,6 @@
         </div>
     </div>
     <script>
-if (window.OWSProjectRestrictionGuard && typeof window.OWSProjectRestrictionGuard.mount === 'function') {
-    window.OWSProjectRestrictionGuard.mount({
-        apiBaseUrl: 'https://owsdatabase.onrender.com',
-        projectSlug: 'a-wild-question-game',
-        projectName: 'A Wild Question Game',
-        checkIntervalMs: 30000
-    });
-}
 
         // Base de datos de personajes por categoría
 const gameData = {
@@ -1550,52 +1309,31 @@ const gameData = {
             { id: "pez_payaso", name: "Pez Payaso", traits: { tipo: "Pez", habitat: "Arrecife", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Rapida", peligro: "Bajo", social: "Pareja" } },
             { id: "orca", name: "Orca", traits: { tipo: "Mamifero", habitat: "Oceanico", tamano: "Grande", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Alto", social: "Manada" } },
             { id: "cangrejo", name: "Cangrejo Azul", traits: { tipo: "Crustaceo", habitat: "Costero", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Lenta", peligro: "Bajo", social: "Colonia" } },
-            { id: "pez_espada", name: "Pez Espada", traits: { tipo: "Pez", habitat: "Oceanico", tamano: "Grande", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Alto", social: "Solitario" } },
-            { id: "morena", name: "Morena Verde", traits: { tipo: "Pez", habitat: "Arrecife", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Lenta", peligro: "Medio", social: "Solitario" } },
-            { id: "atun_rojo", name: "Atun Rojo", traits: { tipo: "Pez", habitat: "Oceanico", tamano: "Grande", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Medio", social: "Manada" } },
             { id: "narval", name: "Narval", traits: { tipo: "Mamifero", habitat: "Polar", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Bajo", social: "Manada" } },
-            { id: "langosta", name: "Langosta Espinosa", traits: { tipo: "Crustaceo", habitat: "Arrecife", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Lenta", peligro: "Bajo", social: "Colonia" } },
-            { id: "pez_globo", name: "Pez Globo", traits: { tipo: "Pez", habitat: "Costero", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Lenta", peligro: "Medio", social: "Solitario" } },
-            { id: "calamar_gigante", name: "Calamar Gigante", traits: { tipo: "Molusco", habitat: "Oceanico", tamano: "Gigante", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Alto", social: "Solitario" } },
-            { id: "manati", name: "Manati", traits: { tipo: "Mamifero", habitat: "Costero", tamano: "Grande", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Bajo", social: "Pareja" } },
-            { id: "krill", name: "Krill Antartico", traits: { tipo: "Crustaceo", habitat: "Polar", tamano: "Pequeno", dieta: "Plancton", movilidad: "Flotante", peligro: "Bajo", social: "Colonia" } },
-            { id: "rayada", name: "Raya Aguila", traits: { tipo: "Pez", habitat: "Costero", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Medio", social: "Pareja" } }
+            { id: "calamar_gigante", name: "Calamar Gigante", traits: { tipo: "Molusco", habitat: "Oceanico", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Medio", social: "Solitario" } },
+            { id: "estrella_mar", name: "Estrella de Mar", traits: { tipo: "Equinodermo", habitat: "Arrecife", tamano: "Pequeno", dieta: "Carnivoro", movilidad: "Lenta", peligro: "Bajo", social: "Solitario" } },
+            { id: "pez_espada", name: "Pez Espada", traits: { tipo: "Pez", habitat: "Oceanico", tamano: "Grande", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Medio", social: "Solitario" } }
         ]
     },
-    animales_salvajes: {
-        name: "Animales Salvajes",
+    inventos_historicos: {
+        name: "Inventos Historicos",
         characters: [
-            { id: "leon", name: "Leon", traits: { tipo: "Mamifero", habitat: "Sabana", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Alto", social: "Manada" } },
-            { id: "elefante", name: "Elefante Africano", traits: { tipo: "Mamifero", habitat: "Sabana", tamano: "Gigante", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Medio", social: "Manada" } },
-            { id: "guepardo", name: "Guepardo", traits: { tipo: "Mamifero", habitat: "Sabana", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Alto", social: "Solitario" } },
-            { id: "oso_pardo", name: "Oso Pardo", traits: { tipo: "Mamifero", habitat: "Bosque", tamano: "Grande", dieta: "Omnivoro", movilidad: "Rapida", peligro: "Alto", social: "Solitario" } },
-            { id: "lobo_gris", name: "Lobo Gris", traits: { tipo: "Mamifero", habitat: "Bosque", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Medio", social: "Manada" } },
-            { id: "aguila_real", name: "Aguila Real", traits: { tipo: "Ave", habitat: "Montana", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Muy rapida", peligro: "Medio", social: "Pareja" } },
-            { id: "cobra_real", name: "Cobra Real", traits: { tipo: "Reptil", habitat: "Selva", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Alto", social: "Solitario" } },
-            { id: "gorila", name: "Gorila de Montaña", traits: { tipo: "Mamifero", habitat: "Selva", tamano: "Grande", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Medio", social: "Manada" } },
-            { id: "zorro_artico", name: "Zorro Artico", traits: { tipo: "Mamifero", habitat: "Polar", tamano: "Pequeno", dieta: "Omnivoro", movilidad: "Rapida", peligro: "Bajo", social: "Pareja" } },
-            { id: "pinguino", name: "Pinguino Emperador", traits: { tipo: "Ave", habitat: "Polar", tamano: "Mediano", dieta: "Carnivoro", movilidad: "Lenta", peligro: "Bajo", social: "Colonia" } },
-            { id: "camello", name: "Camello", traits: { tipo: "Mamifero", habitat: "Desierto", tamano: "Grande", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Bajo", social: "Pareja" } },
-            { id: "escorpion", name: "Escorpion Dorado", traits: { tipo: "Aracnido", habitat: "Desierto", tamano: "Pequeno", dieta: "Carnivoro", movilidad: "Lenta", peligro: "Alto", social: "Solitario" } },
-            { id: "jaguar", name: "Jaguar", traits: { tipo: "Mamifero", habitat: "Selva", tamano: "Grande", dieta: "Carnivoro", movilidad: "Rapida", peligro: "Alto", social: "Solitario" } },
-            { id: "capibara", name: "Capibara", traits: { tipo: "Mamifero", habitat: "Humedal", tamano: "Mediano", dieta: "Herbivoro", movilidad: "Lenta", peligro: "Bajo", social: "Manada" } }
-        ]
-    },
-    biomas_extremos: {
-        name: "Biomas",
-        characters: [
-            { id: "selva_tropical", name: "Selva Tropical", traits: { clima: "Calido", humedad: "Alta", vegetacion: "Densa", altitud: "Baja", agua: "Abundante", biodiversidad: "Alta", suelo: "Pobre" } },
-            { id: "desierto_calido", name: "Desierto Calido", traits: { clima: "Calido", humedad: "Baja", vegetacion: "Escasa", altitud: "Baja", agua: "Escasa", biodiversidad: "Media", suelo: "Arenoso" } },
-            { id: "tundra", name: "Tundra", traits: { clima: "Frio", humedad: "Baja", vegetacion: "Escasa", altitud: "Media", agua: "Moderada", biodiversidad: "Baja", suelo: "Congelado" } },
-            { id: "taiga", name: "Taiga Boreal", traits: { clima: "Frio", humedad: "Media", vegetacion: "Densa", altitud: "Media", agua: "Moderada", biodiversidad: "Media", suelo: "Acido" } },
-            { id: "sabana", name: "Sabana", traits: { clima: "Calido", humedad: "Media", vegetacion: "Dispersa", altitud: "Baja", agua: "Estacional", biodiversidad: "Alta", suelo: "Arcilloso" } },
-            { id: "pradera", name: "Pradera Templada", traits: { clima: "Templado", humedad: "Media", vegetacion: "Dispersa", altitud: "Baja", agua: "Moderada", biodiversidad: "Media", suelo: "Fertil" } },
-            { id: "manglar", name: "Manglar", traits: { clima: "Calido", humedad: "Alta", vegetacion: "Densa", altitud: "Baja", agua: "Salobre", biodiversidad: "Alta", suelo: "Lodoso" } },
-            { id: "arrecife", name: "Arrecife Coralino", traits: { clima: "Calido", humedad: "Alta", vegetacion: "Escasa", altitud: "Baja", agua: "Abundante", biodiversidad: "Alta", suelo: "Coralino" } },
-            { id: "bosque_nublado", name: "Bosque Nublado", traits: { clima: "Templado", humedad: "Alta", vegetacion: "Densa", altitud: "Alta", agua: "Abundante", biodiversidad: "Alta", suelo: "Humifero" } },
-            { id: "alpino", name: "Bioma Alpino", traits: { clima: "Frio", humedad: "Media", vegetacion: "Escasa", altitud: "Alta", agua: "Estacional", biodiversidad: "Baja", suelo: "Rocoso" } },
-            { id: "mediterraneo", name: "Matorral Mediterraneo", traits: { clima: "Templado", humedad: "Baja", vegetacion: "Dispersa", altitud: "Media", agua: "Estacional", biodiversidad: "Media", suelo: "Pedregoso" } },
-            { id: "pantano", name: "Pantano", traits: { clima: "Templado", humedad: "Alta", vegetacion: "Densa", altitud: "Baja", agua: "Abundante", biodiversidad: "Media", suelo: "Lodoso" } }
+            { id: "imprenta", name: "Imprenta Moderna", traits: { era: "Renacimiento", energia: "Manual", uso: "Comunicacion", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Infraestructura" } },
+            { id: "brujula", name: "Brujula Magnetica", traits: { era: "Antiguedad", energia: "Manual", uso: "Navegacion", portatil: "Si", estado: "Analogico", impacto: "Global", entorno: "Movilidad" } },
+            { id: "vapor", name: "Maquina de Vapor", traits: { era: "Revolucion Industrial", energia: "Combustible", uso: "Industria", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Infraestructura" } },
+            { id: "bombilla", name: "Bombilla Electrica", traits: { era: "Revolucion Industrial", energia: "Electrica", uso: "Hogar", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Hogar" } },
+            { id: "telefono", name: "Telefono", traits: { era: "Revolucion Industrial", energia: "Electrica", uso: "Comunicacion", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Hogar" } },
+            { id: "radio", name: "Radio", traits: { era: "Siglo XX", energia: "Electrica", uso: "Comunicacion", portatil: "Si", estado: "Analogico", impacto: "Global", entorno: "Hogar" } },
+            { id: "avion", name: "Avion", traits: { era: "Siglo XX", energia: "Combustible", uso: "Transporte", portatil: "No", estado: "Analogico", impacto: "Global", entorno: "Movilidad" } },
+            { id: "penicilina", name: "Penicilina", traits: { era: "Siglo XX", energia: "Biologico", uso: "Salud", portatil: "Si", estado: "Hibrido", impacto: "Global", entorno: "Laboratorio" } },
+            { id: "pc", name: "Computadora Personal", traits: { era: "Siglo XX", energia: "Electrica", uso: "Computacion", portatil: "No", estado: "Digital", impacto: "Global", entorno: "Hogar" } },
+            { id: "internet", name: "Internet", traits: { era: "Siglo XX", energia: "Red", uso: "Comunicacion", portatil: "No", estado: "Digital", impacto: "Global", entorno: "Infraestructura" } },
+            { id: "smartphone", name: "Smartphone", traits: { era: "Siglo XXI", energia: "Electrica", uso: "Comunicacion", portatil: "Si", estado: "Digital", impacto: "Global", entorno: "Movilidad" } },
+            { id: "impresora_3d", name: "Impresora 3D", traits: { era: "Siglo XXI", energia: "Electrica", uso: "Industria", portatil: "No", estado: "Digital", impacto: "Especializado", entorno: "Laboratorio" } },
+            { id: "telescopio", name: "Telescopio", traits: { era: "Renacimiento", energia: "Manual", uso: "Ciencia", portatil: "Si", estado: "Analogico", impacto: "Global", entorno: "Laboratorio" } },
+            { id: "vacuna", name: "Vacuna", traits: { era: "Revolucion Industrial", energia: "Biologico", uso: "Salud", portatil: "Si", estado: "Hibrido", impacto: "Global", entorno: "Laboratorio" } },
+            { id: "gps", name: "GPS", traits: { era: "Siglo XX", energia: "Electrica", uso: "Navegacion", portatil: "Si", estado: "Digital", impacto: "Global", entorno: "Movilidad" } },
+            { id: "energia_solar", name: "Panel Solar", traits: { era: "Siglo XXI", energia: "Solar", uso: "Industria", portatil: "No", estado: "Digital", impacto: "Especializado", entorno: "Infraestructura" } }
         ]
     }
 };
@@ -1606,90 +1344,50 @@ const questions = {
         { text: "¿Es un mamifero?", trait: "tipo", value: "Mamifero" },
         { text: "¿Es un pez?", trait: "tipo", value: "Pez" },
         { text: "¿Es un molusco?", trait: "tipo", value: "Molusco" },
-        { text: "¿Es un crustaceo?", trait: "tipo", value: "Crustaceo" },
-        { text: "¿Es un cnidario?", trait: "tipo", value: "Cnidario" },
         { text: "¿Vive en zona oceanica abierta?", trait: "habitat", value: "Oceanico" },
         { text: "¿Vive en zona costera?", trait: "habitat", value: "Costero" },
         { text: "¿Vive en arrecifes?", trait: "habitat", value: "Arrecife" },
         { text: "¿Habita regiones polares?", trait: "habitat", value: "Polar" },
         { text: "¿Es de tamaño gigante?", trait: "tamano", value: "Gigante" },
         { text: "¿Es de tamaño grande?", trait: "tamano", value: "Grande" },
-        { text: "¿Es de tamaño mediano?", trait: "tamano", value: "Mediano" },
         { text: "¿Es de tamaño pequeño?", trait: "tamano", value: "Pequeno" },
         { text: "¿Es carnivoro?", trait: "dieta", value: "Carnivoro" },
         { text: "¿Es herbivoro?", trait: "dieta", value: "Herbivoro" },
         { text: "¿Es omnivoro?", trait: "dieta", value: "Omnivoro" },
         { text: "¿Se alimenta filtrando?", trait: "dieta", value: "Filtrador" },
-        { text: "¿Se alimenta de plancton?", trait: "dieta", value: "Plancton" },
         { text: "¿Se mueve muy rapido?", trait: "movilidad", value: "Muy rapida" },
-        { text: "¿Se mueve rapido?", trait: "movilidad", value: "Rapida" },
         { text: "¿Se mueve lentamente?", trait: "movilidad", value: "Lenta" },
         { text: "¿Tiene movimiento flotante?", trait: "movilidad", value: "Flotante" },
         { text: "¿Su nivel de peligro es alto?", trait: "peligro", value: "Alto" },
-        { text: "¿Su nivel de peligro es medio?", trait: "peligro", value: "Medio" },
-        { text: "¿Su nivel de peligro es bajo?", trait: "peligro", value: "Bajo" },
         { text: "¿Suele vivir en manada?", trait: "social", value: "Manada" },
         { text: "¿Suele vivir en colonia?", trait: "social", value: "Colonia" },
-        { text: "¿Suele vivir en pareja?", trait: "social", value: "Pareja" },
-        { text: "¿Suele vivir en solitario?", trait: "social", value: "Solitario" }
+        { text: "¿Es un equinodermo?", trait: "tipo", value: "Equinodermo" },
+        { text: "¿Es de nivel de peligro medio?", trait: "peligro", value: "Medio" }
     ],
-    animales_salvajes: [
-        { text: "¿Es un mamifero?", trait: "tipo", value: "Mamifero" },
-        { text: "¿Es un ave?", trait: "tipo", value: "Ave" },
-        { text: "¿Es un reptil?", trait: "tipo", value: "Reptil" },
-        { text: "¿Es un aracnido?", trait: "tipo", value: "Aracnido" },
-        { text: "¿Habita en la sabana?", trait: "habitat", value: "Sabana" },
-        { text: "¿Habita en bosque?", trait: "habitat", value: "Bosque" },
-        { text: "¿Habita en selva?", trait: "habitat", value: "Selva" },
-        { text: "¿Habita en zonas polares?", trait: "habitat", value: "Polar" },
-        { text: "¿Habita en desierto?", trait: "habitat", value: "Desierto" },
-        { text: "¿Habita en montana?", trait: "habitat", value: "Montana" },
-        { text: "¿Habita en humedal?", trait: "habitat", value: "Humedal" },
-        { text: "¿Es de tamano gigante?", trait: "tamano", value: "Gigante" },
-        { text: "¿Es de tamano grande?", trait: "tamano", value: "Grande" },
-        { text: "¿Es de tamano mediano?", trait: "tamano", value: "Mediano" },
-        { text: "¿Es de tamano pequeno?", trait: "tamano", value: "Pequeno" },
-        { text: "¿Es carnivoro?", trait: "dieta", value: "Carnivoro" },
-        { text: "¿Es herbivoro?", trait: "dieta", value: "Herbivoro" },
-        { text: "¿Es omnivoro?", trait: "dieta", value: "Omnivoro" },
-        { text: "¿Tiene movilidad muy rapida?", trait: "movilidad", value: "Muy rapida" },
-        { text: "¿Tiene movilidad rapida?", trait: "movilidad", value: "Rapida" },
-        { text: "¿Tiene movilidad lenta?", trait: "movilidad", value: "Lenta" },
-        { text: "¿Presenta peligro alto?", trait: "peligro", value: "Alto" },
-        { text: "¿Presenta peligro medio?", trait: "peligro", value: "Medio" },
-        { text: "¿Presenta peligro bajo?", trait: "peligro", value: "Bajo" },
-        { text: "¿Vive en manada?", trait: "social", value: "Manada" },
-        { text: "¿Vive en colonia?", trait: "social", value: "Colonia" },
-        { text: "¿Vive en pareja?", trait: "social", value: "Pareja" },
-        { text: "¿Vive en solitario?", trait: "social", value: "Solitario" }
-    ],
-    biomas_extremos: [
-        { text: "¿Tiene clima calido?", trait: "clima", value: "Calido" },
-        { text: "¿Tiene clima templado?", trait: "clima", value: "Templado" },
-        { text: "¿Tiene clima frio?", trait: "clima", value: "Frio" },
-        { text: "¿Su humedad suele ser alta?", trait: "humedad", value: "Alta" },
-        { text: "¿Su humedad suele ser media?", trait: "humedad", value: "Media" },
-        { text: "¿Su humedad suele ser baja?", trait: "humedad", value: "Baja" },
-        { text: "¿Presenta vegetacion densa?", trait: "vegetacion", value: "Densa" },
-        { text: "¿Presenta vegetacion dispersa?", trait: "vegetacion", value: "Dispersa" },
-        { text: "¿Presenta vegetacion escasa?", trait: "vegetacion", value: "Escasa" },
-        { text: "¿Se ubica en altitud baja?", trait: "altitud", value: "Baja" },
-        { text: "¿Se ubica en altitud media?", trait: "altitud", value: "Media" },
-        { text: "¿Se ubica en altitud alta?", trait: "altitud", value: "Alta" },
-        { text: "¿Tiene agua abundante?", trait: "agua", value: "Abundante" },
-        { text: "¿Tiene agua moderada?", trait: "agua", value: "Moderada" },
-        { text: "¿Tiene agua estacional?", trait: "agua", value: "Estacional" },
-        { text: "¿Tiene agua escasa?", trait: "agua", value: "Escasa" },
-        { text: "¿Tiene agua salobre?", trait: "agua", value: "Salobre" },
-        { text: "¿Su biodiversidad es alta?", trait: "biodiversidad", value: "Alta" },
-        { text: "¿Su biodiversidad es media?", trait: "biodiversidad", value: "Media" },
-        { text: "¿Su biodiversidad es baja?", trait: "biodiversidad", value: "Baja" },
-        { text: "¿El suelo es arenoso?", trait: "suelo", value: "Arenoso" },
-        { text: "¿El suelo es lodoso?", trait: "suelo", value: "Lodoso" },
-        { text: "¿El suelo es fertil?", trait: "suelo", value: "Fertil" },
-        { text: "¿El suelo es congelado?", trait: "suelo", value: "Congelado" },
-        { text: "¿El suelo es rocoso?", trait: "suelo", value: "Rocoso" },
-        { text: "¿El suelo es coralino?", trait: "suelo", value: "Coralino" }
+    inventos_historicos: [
+        { text: "¿Es un invento de la antiguedad?", trait: "era", value: "Antiguedad" },
+        { text: "¿Es un invento del renacimiento?", trait: "era", value: "Renacimiento" },
+        { text: "¿Es de la revolucion industrial?", trait: "era", value: "Revolucion Industrial" },
+        { text: "¿Es un invento del siglo XX?", trait: "era", value: "Siglo XX" },
+        { text: "¿Es un invento del siglo XXI?", trait: "era", value: "Siglo XXI" },
+        { text: "¿Funciona con energia manual?", trait: "energia", value: "Manual" },
+        { text: "¿Usa energia electrica?", trait: "energia", value: "Electrica" },
+        { text: "¿Usa combustible?", trait: "energia", value: "Combustible" },
+        { text: "¿Depende de una red?", trait: "energia", value: "Red" },
+        { text: "¿Su uso principal es comunicacion?", trait: "uso", value: "Comunicacion" },
+        { text: "¿Su uso principal es transporte?", trait: "uso", value: "Transporte" },
+        { text: "¿Su uso principal es salud?", trait: "uso", value: "Salud" },
+        { text: "¿Su uso principal es computacion?", trait: "uso", value: "Computacion" },
+        { text: "¿Su uso principal es industria?", trait: "uso", value: "Industria" },
+        { text: "¿Es portatil?", trait: "portatil", value: "Si" },
+        { text: "¿Es digital?", trait: "estado", value: "Digital" },
+        { text: "¿Es analogico?", trait: "estado", value: "Analogico" },
+        { text: "¿Tiene impacto global?", trait: "impacto", value: "Global" },
+        { text: "¿Se usa principalmente en laboratorio?", trait: "entorno", value: "Laboratorio" },
+        { text: "¿Se usa principalmente en movilidad?", trait: "entorno", value: "Movilidad" },
+        { text: "¿Su uso principal es navegacion?", trait: "uso", value: "Navegacion" },
+        { text: "¿Su uso principal es ciencia?", trait: "uso", value: "Ciencia" },
+        { text: "¿Usa energía solar?", trait: "energia", value: "Solar" }
     ]
 };
         // Estado del juego
@@ -1707,13 +1405,8 @@ let gameState = {
     extraQuestionAwarded  : false, // se activa cuando el rival salta
     p1ReminderSeen: false,   // ← nueva
     ultraGuided: true,
-    lastRiskPromptCount: null,
-    forcedFinalActive: false,
-    localFinalChoiceP1: null,
-    localFinalChoiceP2: null,
-    localNoGuessSwitches: 0,
-    questionSearch: '',
-    traitFilter: 'all'
+    player1FailedGuesses: 0,
+    player2FailedGuesses: 0,
 };
 
 const onlineState = {
@@ -1724,9 +1417,7 @@ const onlineState = {
     role: null, // host | guest
     playerName: '',
     opponentName: '',
-    waitingForGuest: false,
-    finalChoiceSubmitted: false,
-    finalChoiceValue: null
+    waitingForGuest: false
 };
 
 function isOnlineMode() {
@@ -1824,8 +1515,6 @@ function ensureOnlineSocket() {
         if (!isOnlineMode()) return;
         closeWaitOverlay();
         gameState.gamePhase = 'playing';
-        gameState.forcedFinalActive = false;
-        gameState.lastRiskPromptCount = null;
         gameState.currentPlayer = room?.currentTurn === 'guest' ? 2 : 1;
         gameState.questionsLeftThisTurn = room?.questionsLeftThisTurn || 1;
         gameState.availableQuestions = [...(questions[gameState.currentCategory] || [])];
@@ -1856,7 +1545,6 @@ function ensureOnlineSocket() {
         generateQuestionButtons();
         updateQuestionCountBadge();
         showEventToast(`Cambio de turno: ${getCurrentTurnLabel()}`, 'Online');
-        maybeTriggerForcedFinal();
     });
     socket.on('awqg:turn-skipped', ({ currentTurn, questionsLeftThisTurn, skippedBy }) => {
         if (!isOnlineMode()) return;
@@ -1887,8 +1575,6 @@ function ensureOnlineSocket() {
         updateGameDisplay();
         generateQuestionButtons();
         updateQuestionCountBadge();
-        maybeSuggestRiskFromCandidates();
-        maybeTriggerForcedFinal();
     });
     socket.on('awqg:guess-failed', ({ guessedBy, guessed, currentTurn, questionsLeftThisTurn }) => {
         if (!isOnlineMode()) return;
@@ -1902,49 +1588,6 @@ function ensureOnlineSocket() {
         if (!isOnlineMode()) return;
         showVictoryScreen(winner === 'guest' ? 2 : 1);
         showEventToast(`Ganador: ${winnerName || winner}`, 'Online');
-    });
-    socket.on('awqg:final-duel-start', ({ reason }) => {
-        if (!isOnlineMode()) return;
-        gameState.forcedFinalActive = true;
-        onlineState.finalChoiceSubmitted = false;
-        onlineState.finalChoiceValue = null;
-        updateActionLocks();
-        showFinalBanner(
-            'PROTOCOLO: DECISIÓN FINAL',
-            reason || 'No hay más margen: ambos jugadores deben elegir su veredicto final con lo que dedujeron.'
-        );
-        setTimeout(() => {
-            promptOnlineFinalChoice();
-        }, 1400);
-    });
-    socket.on('awqg:final-choice-submitted', ({ by }) => {
-        if (!isOnlineMode()) return;
-        if (by === onlineState.role) {
-            showEventToast('Tu decisión final fue registrada. Espera al rival.', 'Final');
-        } else {
-            showEventToast('El rival ya envió su decisión final.', 'Final');
-            if (!onlineState.finalChoiceSubmitted) {
-                promptOnlineFinalChoice();
-            }
-        }
-    });
-    socket.on('awqg:final-reveal', async ({ winner, hostCorrect, guestCorrect, hostChoice, guestChoice }) => {
-        if (!isOnlineMode()) return;
-        showSuspenseOverlay('Resolviendo resultado final...', 'Comparando elecciones contra secretos...');
-        await new Promise(r => setTimeout(r, 2500));
-        hideSuspenseOverlay();
-        gameState.forcedFinalActive = false;
-        updateActionLocks();
-        const localWon = (winner === onlineState.role);
-        if (winner === 'host' || winner === 'guest') {
-            showVictoryScreen(winner === 'host' ? 1 : 2);
-            showEventToast(localWon ? 'Ganaste el veredicto final.' : 'Perdiste el veredicto final.', 'Resultado');
-        } else {
-            await uiAlert(
-                `Empate técnico.\nHost: ${hostChoice} (${hostCorrect ? '✅' : '❌'})\nGuest: ${guestChoice} (${guestCorrect ? '✅' : '❌'})`,
-                'Resultado final'
-            );
-        }
     });
 
     return socket;
@@ -1980,236 +1623,6 @@ function closeWaitOverlay() {
     if (o) {
         o.classList.remove('active');
         o.setAttribute('aria-hidden', 'true');
-    }
-}
-
-function getRemainingCandidateNames() {
-    const cells = Array.from(document.querySelectorAll('.elim-cell'));
-    if (!cells.length) {
-        const cat = gameData[gameState.currentCategory]?.characters || [];
-        return cat.map(c => c.name);
-    }
-    return cells.filter(c => c.dataset.elim !== '1').map(c => c.textContent.trim()).filter(Boolean);
-}
-
-function getRemainingCandidateCount() {
-    return getRemainingCandidateNames().length;
-}
-
-function getActiveCandidates() {
-    const list = gameData[gameState.currentCategory]?.characters || [];
-    const alive = new Set(getRemainingCandidateNames().map((n) => String(n).toLowerCase()));
-    if (!alive.size) return list;
-    return list.filter((ch) => alive.has(String(ch.name).toLowerCase()));
-}
-
-function updateMinimalHud() {
-    const turnEl = document.getElementById('turnHud');
-    const candEl = document.getElementById('candidateHud');
-    const qEl = document.getElementById('questionsHud');
-    if (turnEl) turnEl.textContent = `Jugador ${gameState.currentPlayer}`;
-    if (candEl) candEl.textContent = String(getRemainingCandidateCount());
-    if (qEl) qEl.textContent = String(gameState.questionsLeftThisTurn ?? 1);
-}
-
-function getDistinctTraitsForCategory() {
-    const categoryChars = gameData[gameState.currentCategory]?.characters || [];
-    const set = new Set();
-    categoryChars.forEach((ch) => {
-        Object.keys(ch.traits || {}).forEach((trait) => set.add(trait));
-    });
-    return Array.from(set);
-}
-
-function renderTraitFilters() {
-    const row = document.getElementById('questionTraitFilters');
-    if (!row) return;
-    row.innerHTML = '';
-    const traitOptions = ['all', ...getDistinctTraitsForCategory()];
-    traitOptions.forEach((trait) => {
-        const btn = document.createElement('button');
-        btn.className = `trait-chip ${gameState.traitFilter === trait ? 'active' : ''}`;
-        btn.type = 'button';
-        btn.textContent = trait === 'all' ? 'Todas' : trait;
-        btn.onclick = () => {
-            gameState.traitFilter = trait;
-            generateQuestionButtons();
-            renderTraitFilters();
-        };
-        row.appendChild(btn);
-    });
-}
-
-function getFilteredQuestions() {
-    const search = String(gameState.questionSearch || '').trim().toLowerCase();
-    return gameState.availableQuestions.filter((q) => {
-        const traitOk = gameState.traitFilter === 'all' || q.trait === gameState.traitFilter;
-        if (!traitOk) return false;
-        if (!search) return true;
-        return String(q.text).toLowerCase().includes(search) || String(q.trait).toLowerCase().includes(search) || String(q.value).toLowerCase().includes(search);
-    });
-}
-
-function scoreQuestionForCandidates(question, candidates) {
-    if (!Array.isArray(candidates) || !candidates.length) return -1;
-    const yesCount = candidates.filter((c) => c.traits?.[question.trait] === question.value).length;
-    const noCount = candidates.length - yesCount;
-    if (!yesCount || !noCount) return 0.1;
-    const balance = 1 - Math.abs(yesCount - noCount) / candidates.length;
-    return balance;
-}
-
-function suggestBestQuestion() {
-    const candidates = getActiveCandidates();
-    const pool = getFilteredQuestions();
-    if (!pool.length) {
-        showEventToast('No hay preguntas disponibles para sugerir.', 'Asistente');
-        return;
-    }
-    let best = null;
-    let bestScore = -1;
-    pool.forEach((q) => {
-        const score = scoreQuestionForCandidates(q, candidates);
-        if (score > bestScore) {
-            bestScore = score;
-            best = q;
-        }
-    });
-    if (!best) return;
-    document.getElementById('currentQuestion').textContent = `Sugerencia táctica: ${best.text}`;
-    showEventToast('Sugerencia lista: usa una pregunta que mejor divide candidatos.', 'Asistente');
-}
-
-function showFinalBanner(title, text, duration = 2600) {
-    const box = document.getElementById('finalBanner');
-    const t = document.getElementById('finalBannerTitle');
-    const d = document.getElementById('finalBannerText');
-    if (!box || !t || !d) return;
-    t.textContent = title;
-    d.textContent = text;
-    box.classList.add('active');
-    box.setAttribute('aria-hidden', 'false');
-    anime({
-        targets: box,
-        scale: [0.95, 1],
-        opacity: [0, 1],
-        duration: 260,
-        easing: 'easeOutQuad'
-    });
-    setTimeout(() => {
-        anime({
-            targets: box,
-            opacity: [1, 0],
-            duration: 240,
-            easing: 'easeInQuad',
-            complete: () => {
-                box.classList.remove('active');
-                box.setAttribute('aria-hidden', 'true');
-            }
-        });
-    }, duration);
-}
-
-function showSuspenseOverlay(title, text) {
-    const o = document.getElementById('suspenseOverlay');
-    const t = document.getElementById('suspenseTitle');
-    const d = document.getElementById('suspenseText');
-    if (t) t.textContent = title;
-    if (d) d.textContent = text;
-    if (o) {
-        o.classList.add('active');
-        o.setAttribute('aria-hidden', 'false');
-    }
-}
-
-function hideSuspenseOverlay() {
-    const o = document.getElementById('suspenseOverlay');
-    if (o) {
-        o.classList.remove('active');
-        o.setAttribute('aria-hidden', 'true');
-    }
-}
-
-async function maybeSuggestRiskFromCandidates() {
-    if (gameState.forcedFinalActive) return;
-    if (isOnlineMode()) {
-        const expectedTurn = onlineState.role === 'host' ? 1 : 2;
-        if (gameState.currentPlayer !== expectedTurn) return;
-    }
-    const remaining = getRemainingCandidateCount();
-    if (remaining > 4) return;
-    if (gameState.lastRiskPromptCount === remaining) return;
-    gameState.lastRiskPromptCount = remaining;
-    const want = await uiConfirm(`Quedan ${remaining} candidatos posibles.\n¿Quieres arriesgarte ahora?`, 'Ventana de riesgo');
-    if (want) {
-        guessCharacter();
-    }
-}
-
-function shouldTriggerForcedFinal() {
-    const remaining = getRemainingCandidateCount();
-    return remaining > 0 && remaining <= 3;
-}
-
-async function triggerLocalForcedFinal() {
-    if (gameState.forcedFinalActive) return;
-    gameState.forcedFinalActive = true;
-    updateActionLocks();
-    showFinalBanner(
-        'PROTOCOLO: DECISIÓN FINAL',
-        'Ningún margen para dudas. Ambos jugadores deben elegir su veredicto final usando toda la información deducida.'
-    );
-    await new Promise(r => setTimeout(r, 1600));
-    const candidates = getRemainingCandidateNames();
-    const p1 = await uiSelect('Jugador 1: selecciona el personaje final.', candidates, 'Decisión final - Jugador 1');
-    if (!p1) { gameState.forcedFinalActive = false; return; }
-    showEventToast('Jugador 1 completó su elección final. Esperando rival.', 'Decisión final');
-    const p2 = await uiSelect('Jugador 2: selecciona el personaje final.', candidates, 'Decisión final - Jugador 2');
-    if (!p2) { gameState.forcedFinalActive = false; return; }
-
-    showSuspenseOverlay('Procesando veredicto final...', 'Analizando deducciones y decisiones...');
-    await new Promise(r => setTimeout(r, 2300));
-    hideSuspenseOverlay();
-
-    const p1Correct = p1.toLowerCase() === String(gameState.player2Character?.name || '').toLowerCase();
-    const p2Correct = p2.toLowerCase() === String(gameState.player1Character?.name || '').toLowerCase();
-    if (p1Correct && !p2Correct) showVictoryScreen(1);
-    else if (p2Correct && !p1Correct) showVictoryScreen(2);
-    else {
-        await uiAlert(`Resultado final:\nJugador 1: ${p1Correct ? 'Correcto ✅' : 'Incorrecto ❌'}\nJugador 2: ${p2Correct ? 'Correcto ✅' : 'Incorrecto ❌'}`, 'Empate técnico');
-    }
-    gameState.forcedFinalActive = false;
-    updateActionLocks();
-}
-
-function maybeTriggerForcedFinal() {
-    if (!shouldTriggerForcedFinal()) return;
-    if (gameState.forcedFinalActive) return;
-    if (isOnlineMode()) {
-        const s = ensureOnlineSocket();
-        if (s && onlineState.roomCode) {
-            s.emit('awqg:request-final-duel', { code: onlineState.roomCode });
-        }
-    } else {
-        triggerLocalForcedFinal();
-    }
-}
-
-async function promptOnlineFinalChoice() {
-    if (!isOnlineMode() || !gameState.forcedFinalActive) return;
-    if (onlineState.finalChoiceSubmitted) return;
-    const candidates = getRemainingCandidateNames();
-    const choice = await uiSelect(
-        'Selecciona tu veredicto final. Solo cuenta una decisión.',
-        candidates,
-        'Decisión final (Online)'
-    );
-    if (!choice) return;
-    onlineState.finalChoiceSubmitted = true;
-    onlineState.finalChoiceValue = choice;
-    const s = ensureOnlineSocket();
-    if (s && onlineState.roomCode) {
-        s.emit('awqg:submit-final-choice', { code: onlineState.roomCode, choice });
     }
 }
 
@@ -2287,9 +1700,6 @@ function joinOnlineRoom() {
 
 function hardResetOnlineState() {
     closeWaitOverlay();
-    hideSuspenseOverlay();
-    const finalBanner = document.getElementById('finalBanner');
-    if (finalBanner) finalBanner.classList.remove('active');
     if (onlineState.socket) {
         try { onlineState.socket.disconnect(); } catch (_) {}
     }
@@ -2301,8 +1711,6 @@ function hardResetOnlineState() {
     onlineState.playerName = '';
     onlineState.opponentName = '';
     onlineState.waitingForGuest = false;
-    onlineState.finalChoiceSubmitted = false;
-    onlineState.finalChoiceValue = null;
 }
 
 function setGuideStep(activeStep) {
@@ -2415,7 +1823,7 @@ function updateActionLocks() {
     if (ultraBtn) ultraBtn.textContent = `Ultra guiado: ${gameState.ultraGuided ? 'ON' : 'OFF'}`;
 
     if (!gameState.ultraGuided) {
-        ['skipBtn', 'endTurnBtn', 'guessBtn', 'backGameBtn', 'backSelectionBtn', 'bestQuestionBtn'].forEach(id => setButtonLock(id, true));
+        ['skipBtn', 'endTurnBtn', 'guessBtn', 'backGameBtn', 'backSelectionBtn'].forEach(id => setButtonLock(id, true));
         return;
     }
 
@@ -2424,14 +1832,12 @@ function updateActionLocks() {
     const answering = document.getElementById('answerButtons')?.style.display !== 'none';
     const hasAsked = getQuestionCountForCurrentPlayer() > 0;
     const myTurn = !isOnlineMode() || (gameState.currentPlayer === (onlineState.role === 'host' ? 1 : 2));
-    const lockedByFinal = gameState.forcedFinalActive;
 
     setButtonLock('backSelectionBtn', inSelection, 'Disponible en fase de selección.');
     setButtonLock('backGameBtn', inPlaying, 'Disponible durante la partida.');
-    setButtonLock('bestQuestionBtn', inPlaying && !lockedByFinal && myTurn && !answering, 'Disponible durante tu turno de preguntas.');
-    setButtonLock('skipBtn', inPlaying && !lockedByFinal && myTurn && !answering && gameState.questionsLeftThisTurn > 0, 'Primero termina de responder la pregunta activa.');
-    setButtonLock('endTurnBtn', inPlaying && !lockedByFinal && myTurn && !answering, 'Solo el jugador de turno puede terminarlo.');
-    setButtonLock('guessBtn', inPlaying && !lockedByFinal && myTurn && !answering && hasAsked, 'Haz al menos una pregunta antes de adivinar.');
+    setButtonLock('skipBtn', inPlaying && myTurn && !answering && gameState.questionsLeftThisTurn > 0, 'Primero termina de responder la pregunta activa.');
+    setButtonLock('endTurnBtn', inPlaying && myTurn && !answering, 'Solo el jugador de turno puede terminarlo.');
+    setButtonLock('guessBtn', inPlaying && myTurn && !answering && hasAsked, 'Haz al menos una pregunta antes de adivinar.');
 }
 
 function toggleUltraGuide() {
@@ -2662,30 +2068,49 @@ function selectCategory(category) {
     }
 }
 
-function renderCharacters() {
+function renderCharacters(filterQuery) {
+    if (filterQuery === undefined) filterQuery = '';
     const categoryData = gameData[gameState.currentCategory];
     const grid = document.getElementById('characterGrid');
     grid.innerHTML = '';
-    
-    categoryData.characters.forEach(character => {
+
+    // Agregar buscador si no existe
+    let searchInput = document.getElementById('char-search-input');
+    if (!searchInput) {
+        searchInput = document.createElement('input');
+        searchInput.id = 'char-search-input';
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Buscar personaje...';
+        searchInput.style.cssText = 'width:100%;padding:10px 14px;margin-bottom:16px;background:rgba(0,255,255,0.07);border:1px solid rgba(0,255,255,0.3);border-radius:10px;color:#fff;font-size:1rem;outline:none;font-family:inherit;';
+        searchInput.addEventListener('input', () => renderCharacters(searchInput.value));
+        grid.parentElement.insertBefore(searchInput, grid);
+    } else {
+        searchInput = document.getElementById('char-search-input');
+    }
+    const filterText = (typeof filterQuery === 'string' ? filterQuery : '') || (searchInput ? searchInput.value : '');
+
+    const filteredChars = filterText
+        ? categoryData.characters.filter(c => c.name.toLowerCase().includes(filterText.toLowerCase()))
+        : categoryData.characters;
+
+    filteredChars.forEach(character => {
         const card = document.createElement('div');
         card.className = 'character-card';
         card.onclick = () => selectCharacter(character);
         
         const traits = Object.entries(character.traits).slice(0, 3);
         const traitsHtml = traits.map(([key, value]) => 
-            `<div><strong>${key}:</strong> ${value}</div>`
+            <div><strong>:</strong> </div>
         ).join('');
         
-        card.innerHTML = `
-            <div class="character-name">${character.name}</div>
-            <div class="character-traits">${traitsHtml}</div>
-        `;
+        card.innerHTML = 
+            <div class="character-name"></div>
+            <div class="character-traits"></div>
+        ;
         
         grid.appendChild(card);
     });
 }
-
 function selectCharacter(character) {
     if (isOnlineMode()) {
         const socket = ensureOnlineSocket();
@@ -2704,7 +2129,7 @@ function selectCharacter(character) {
     /* 1er clic – Jugador 1 elige **el personaje que deberá adivinar el Jugador 2** */
     if (gameState.selectionPhase === 1) {
         gameState.player1Character = character;   // ← secreto de P2 (objetivo de P1)
-        showEventToast('Personaje de Jugador 1 guardado.', 'Selección');
+        showEventToast(`Jugador 1 eligió: ${character.name}.`, 'Selección');
         showReminder(
             "Antes de que el Jugador 2 elija, recuerda los rasgos de tu elección:",
             character
@@ -2718,8 +2143,12 @@ function selectCharacter(character) {
 
     /* 2º clic – Jugador 2 elige **el personaje que deberá adivinar el Jugador 1** */
     if (gameState.selectionPhase === 2) {
+        if (character.id === gameState.player1Character.id) {
+            uiAlert('Por favor selecciona un personaje diferente al que eligió el Jugador 1', 'Selección inválida');
+            return;
+        }
         gameState.player2Character = character;   // ← secreto de P1 (objetivo de P2)
-        showEventToast('Personaje de Jugador 2 guardado.', 'Selección');
+        showEventToast(`Jugador 2 eligió: ${character.name}.`, 'Selección');
         showReminder(
             "Antes de comenzar el juego, recuerda los rasgos de tu elección:",
             character
@@ -2742,14 +2171,12 @@ function renderElimTable() {
         cell.onclick = () => toggleCell(cell);
         cont.appendChild(cell);
     });
-    updateMinimalHud();
 }
 
 function toggleCell(cell){
     const flag = cell.dataset.elim === '1';
     cell.dataset.elim = flag ? '0' : '1';
     cell.classList.toggle('eliminated', !flag);
-    updateMinimalHud();
 }
 
 function eliminateByTrait(trait, value, answer){
@@ -2765,7 +2192,6 @@ function eliminateByTrait(trait, value, answer){
                     cell.classList.add('eliminated');
                     cell.dataset.elim = '1';
                     cell.classList.remove('shake');
-                    updateMinimalHud();
                 }, 300);
             }
         }
@@ -2790,7 +2216,6 @@ function autoEliminateForAsker(trait, value, answer){
                     cell.classList.add('eliminated');
                     cell.dataset.elim = '1';
                     cell.classList.remove('shake');
-                    updateMinimalHud();
                 }, 300);
             }
         }
@@ -2804,6 +2229,15 @@ function consumeQuestion(){
     if(gameState.questionsLeftThisTurn <= 0){
         endTurn();
     }
+    if (gameState.availableQuestions.length === 0) {
+        // Se agotaron todas las preguntas — empate
+        showEventToast('¡Se agotaron todas las preguntas! Termina el turno actual para llegar al empate.', 'Sin preguntas');
+        // Deshabilitar el botón de preguntas
+        const qBtn = document.getElementById('questionButtons');
+        if (qBtn) qBtn.style.display = 'none';
+        // Forzar fin de turno cuando el jugador termine de responder la pregunta actual
+        gameState.questionsLeftThisTurn = 0;
+    }
 }
 function updateQuestionCountBadge(){
     let badge = document.getElementById('qLeftBadge');
@@ -2814,8 +2248,6 @@ function updateQuestionCountBadge(){
         document.querySelector('.current-question').appendChild(badge);
     }
     badge.textContent = `(${gameState.questionsLeftThisTurn})`;
-    const hud = document.getElementById('questionsHud');
-    if (hud) hud.textContent = String(gameState.questionsLeftThisTurn ?? 1);
 }
 
 /* ---- SALTAR TURNO ---- */
@@ -2840,14 +2272,9 @@ function skipTurnForExtra(){
 
 function startGame() {
     gameState.gamePhase = 'playing';
-    gameState.forcedFinalActive = false;
-    gameState.lastRiskPromptCount = null;
-    gameState.localNoGuessSwitches = 0;
     gameState.currentPlayer = 1;
     gameState.availableQuestions = [...questions[gameState.currentCategory]];
     gameState.questionsLeftThisTurn = 1; updateQuestionCountBadge();
-    gameState.questionSearch = '';
-    gameState.traitFilter = 'all';
     
     // Mezclar preguntas
     for (let i = gameState.availableQuestions.length - 1; i > 0; i--) {
@@ -2858,13 +2285,9 @@ function startGame() {
     showScreen('gameScreen');
     updateGameDisplay();
     document.getElementById('currentQuestion').textContent = 'Turno del Jugador 1: elige una pregunta para empezar.';
-    const searchInput = document.getElementById('questionSearch');
-    if (searchInput) searchInput.value = '';
     
     generateQuestionButtons();
     renderElimTable();
-    renderTraitFilters();
-    updateMinimalHud();
     updateGuidePanel();
     showEventToast('Comienza el juego. Jugador 1 abre la ronda.', 'Inicio');
 }
@@ -2914,34 +2337,31 @@ if (gameState.player2Character) {
 
     // Actualizar historial de preguntas
     updateQuestionHistory();
-    updateMinimalHud();
 }
 
 function generateQuestionButtons() {
     const container = document.getElementById('questionButtons');
-    container.innerHTML = '<h3 style="text-align: center; margin-bottom: 12px; color: #9defff; font-size:1rem;">Banco de preguntas</h3>';
+    container.innerHTML = '<h3 style="text-align: center; margin-bottom: 20px; color: #00ffff;">Elige una pregunta:</h3>';
     
     const grid = document.createElement('div');
-    grid.style.cssText = 'display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 9px;';
+    grid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;';
     
-    const filtered = getFilteredQuestions();
-    const questionsToShow = filtered.slice(0, 8);
+    // Mostrar las primeras 6 preguntas disponibles
+    const questionsToShow = gameState.availableQuestions.slice(0, 6);
     if (!questionsToShow.length) {
-        container.innerHTML += '<p style="text-align:center;color:#b9c8eb;">No hay resultados con ese filtro. Prueba limpiar búsqueda o cambiar rasgo.</p>';
+        container.innerHTML += '<p style="text-align:center;color:#b9c8eb;">No quedan preguntas disponibles. Puedes intentar adivinar o terminar turno.</p>';
         return;
     }
     
-    questionsToShow.forEach((question) => {
-        const absoluteIndex = gameState.availableQuestions.indexOf(question);
+    questionsToShow.forEach((question, index) => {
         const button = document.createElement('button');
         button.className = 'btn btn-secondary';
-        button.style.cssText = 'font-size: 0.88rem; padding: 10px 11px; text-align: left; text-transform: none; border-radius:12px;';
-        button.innerHTML = `<strong style="display:block;color:#d8faff;margin-bottom:3px;">${question.text}</strong><span style="font-size:0.75rem;opacity:0.85;">${question.trait}: ${question.value}</span>`;
-        button.onclick = () => askQuestion(question, absoluteIndex);
+        button.style.cssText = 'font-size: 0.9rem; padding: 10px 15px; text-align: left; text-transform: none;';
+        button.textContent = question.text;
+        button.onclick = () => askQuestion(question, index);
         grid.appendChild(button);
     });
     updateQuestionCountBadge();
-    updateMinimalHud();
     
     container.appendChild(grid);
 }
@@ -2958,7 +2378,7 @@ function askQuestion(question, questionIndex) {
         gameState.currentQuestion = question;
         document.getElementById('currentQuestion').textContent = question.text;
         document.getElementById('questionButtons').style.display = 'none';
-        if (questionIndex >= 0) gameState.availableQuestions.splice(questionIndex, 1);
+        gameState.availableQuestions.splice(questionIndex, 1);
         socket.emit('awqg:ask-question', { code: onlineState.roomCode, question });
         updateActionLocks();
         return;
@@ -2973,7 +2393,7 @@ function askQuestion(question, questionIndex) {
     updateActionLocks();
     
     // Remover la pregunta de las disponibles
-    if (questionIndex >= 0) gameState.availableQuestions.splice(questionIndex, 1);
+    gameState.availableQuestions.splice(questionIndex, 1);
 }
 
 function answerQuestion(answer) {
@@ -3012,9 +2432,6 @@ function answerQuestion(answer) {
     eliminateByTrait(question.trait, question.value, answer); // <-- déjala aquí
 autoEliminateForAsker(question.trait, question.value, answer);
     consumeQuestion();             // consume la pregunta
-    maybeSuggestRiskFromCandidates();
-    maybeTriggerForcedFinal();
-    updateMinimalHud();
     updateGuidePanel();
     }, 2000);
 }
@@ -3107,32 +2524,52 @@ function endTurn() {
     // 1) si aún le quedan preguntas en este turno, no hacemos nada
     if (gameState.questionsLeftThisTurn > 0) return;
 
-    // 2) cambiamos de jugador
-    gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
-    gameState.localNoGuessSwitches = (gameState.localNoGuessSwitches || 0) + 1;
+    // 2) comprobar empate por preguntas agotadas
+    if (gameState.availableQuestions.length === 0 && gameState.questionsLeftThisTurn === 0) {
+        showDrawScreen();
+        return;
+    }
 
-    // 3) asignamos preguntas para el nuevo turno
+    // 3) cambiamos de jugador
+    gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
+
+    // 4) asignamos preguntas para el nuevo turno
     gameState.questionsLeftThisTurn = gameState.extraQuestionAwarded ? 2 : 1;
     gameState.extraQuestionAwarded = false;
 
-    // 4) mostramos la pantalla de cambio (para que no vea el rival)
+    // 5) mostramos la pantalla de cambio (para que no vea el rival)
     showTurnScreen();
     showEventToast(`Cambio de turno: ahora juega el Jugador ${gameState.currentPlayer}.`, 'Turno');
     updateGuidePanel();
 
-    // 5) **auto-iniciamos** el turno del jugador que toca
+    // 6) **auto-iniciamos** el turno del jugador que toca
     setTimeout(() => {
         hideTurnScreen();
         updateGameDisplay();          // oculta/muestra paneles
         generateQuestionButtons();    // regenera botones
         updateQuestionCountBadge();   // muestra (1) o (2)
-        updateMinimalHud();
         document.getElementById('currentQuestion').textContent = `Turno del Jugador ${gameState.currentPlayer}: elige tu pregunta.`;
         updateGuidePanel();
-        if ((gameState.localNoGuessSwitches || 0) >= 6) {
-            triggerLocalForcedFinal();
-        }
     }, 800); // 0,8 s para que se lea el mensaje
+}
+
+function showDrawScreen() {
+    hideAllScreens();
+    const victory = document.getElementById('victoryScreen');
+    if (!victory) return;
+    victory.style.display = 'flex';
+    const title = victory.querySelector('.victory-title') || victory.querySelector('h1');
+    const sub   = victory.querySelector('.victory-subtitle') || victory.querySelector('p');
+    if (title) title.textContent = '¡EMPATE!';
+    if (sub)   sub.textContent  = 'Se agotaron las preguntas sin que nadie adivinara.';
+    if (typeof confetti !== 'undefined') {
+        confetti({ particleCount: 60, spread: 50, colors: ['#aaa', '#fff', '#888'] });
+    }
+}
+
+function hideAllScreens() {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    hideTurnScreen();
 }
 
 function startTurn() {
@@ -3141,10 +2578,14 @@ function startTurn() {
     document.getElementById('currentQuestion').textContent = 'Elige tu primera pregunta...';
     document.getElementById('questionButtons').style.display = 'block';
     generateQuestionButtons();
-    updateMinimalHud();
     updateGuidePanel();
 }
 
+function _normalizeGuess(s) {
+    return String(s || '').toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]/g, '');
+}
 async function guessCharacter(){
     if (isOnlineMode()) {
         const expectedTurn = onlineState.role === 'host' ? 1 : 2;
@@ -3152,11 +2593,7 @@ async function guessCharacter(){
             showEventToast('No es tu turno para adivinar.', 'Online');
             return;
         }
-        const guess = await uiSelect(
-            'Selecciona el personaje que crees que tiene tu rival.',
-            getRemainingCandidateNames(),
-            'Adivinar personaje (Online)'
-        );
+        const guess = await uiPrompt('Escribe el nombre exacto del personaje rival:', '', 'Adivinar personaje (Online)');
         if (!guess) return;
         const socket = ensureOnlineSocket();
         if (!socket || !onlineState.roomCode) return;
@@ -3171,20 +2608,27 @@ async function guessCharacter(){
     const opponent      = currentPlayer===1? gameState.player2Character : gameState.player1Character;
     const totalQ        = (gameState.player1Questions.length + gameState.player2Questions.length);
 
-    let msg = 'Selecciona el personaje que crees que tiene tu rival.';
-    if(totalQ < 3) msg = '⚠️ Muy pronto para adivinar. Aun así, elige si quieres arriesgar.';
+    let msg = `¿Cuál crees que es el personaje de tu rival?\n\n`;
+    if(totalQ < 3) msg += '⚠️ Es MUY arriesgado adivinar tan pronto. ';
+    msg += `Escribe el nombre exacto:`;
 
-    const guess = await uiSelect(msg, getRemainingCandidateNames(), 'Adivinar personaje');
+    const guess = await uiPrompt(msg, '', 'Adivinar personaje');
     if(!guess) return;
-    gameState.localNoGuessSwitches = 0;
 
-    if(guess.trim().toLowerCase() === opponent.name.toLowerCase()){
+    if (_normalizeGuess(guess) === _normalizeGuess(opponent.name)) {
         showVictoryScreen(currentPlayer);
-    }else{
-        await uiAlert(`❌ Incorrecto. El personaje no era “${guess}”.`, 'Intento fallido');
+    } else {
+        // Penalizacion: pierde su turno Y el rival gana pregunta extra
+        const failKey = currentPlayer === 1 ? 'player1FailedGuesses' : 'player2FailedGuesses';
+        gameState[failKey] = (gameState[failKey] || 0) + 1;
+        if (gameState[failKey] >= 2) {
+            showEventToast(`!Jugador ${currentPlayer} tiene ${gameState[failKey]} intentos fallidos! El rival gana pregunta extra.`, 'Penalizacion');
+            gameState.extraQuestionAwarded = true;
+        }
+        await uiAlert(`❌ Incorrecto. El personaje no era "${guess}".`, 'Intento fallido');
         endTurn();
     }
-}
+}}
 
 async function backToMenu() {
     const ok = await uiConfirm('¿Estás seguro de que quieres volver al menú principal? Se perderá el progreso actual.', 'Volver al menú');
@@ -3216,13 +2660,8 @@ function resetGame() {
         extraQuestionAwarded: false,
         p1ReminderSeen: false,
         ultraGuided: keepUltraGuide,
-        lastRiskPromptCount: null,
-        forcedFinalActive: false,
-        localFinalChoiceP1: null,
-        localFinalChoiceP2: null,
-        localNoGuessSwitches: 0,
-        questionSearch: '',
-        traitFilter: 'all'
+        player1FailedGuesses: 0,
+        player2FailedGuesses: 0,
     };
 }
 
@@ -3270,14 +2709,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateActionLocks();
     showEventToast('Selecciona una categoría para comenzar.', 'Guía');
     refreshWaitingRooms();
-
-    const searchInput = document.getElementById('questionSearch');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            gameState.questionSearch = e.target.value || '';
-            if (gameState.gamePhase === 'playing') generateQuestionButtons();
-        });
-    }
 });
 
 // Prevenir que el jugador vea la pantalla del oponente
@@ -3315,7 +2746,12 @@ document.addEventListener('keydown', function(e) {
                 }
             }
         } else if (e.key === 'Escape') {
-            endTurn();
+            // Solo si Ultra guiado esta OFF, y no hay respuesta pendiente, y no quedan preguntas
+            if (!gameState.ultraGuided) return; // con UG off los botones ya estan todos desbloqueados
+            const answering = document.getElementById('answerButtons')?.style.display !== 'none';
+            if (!answering && gameState.questionsLeftThisTurn <= 0) {
+                endTurn();
+            }
         }
     }
 });
@@ -3329,26 +2765,15 @@ const uiModal = document.getElementById('uiModal');
 const uiModalTitle = document.getElementById('uiModalTitle');
 const uiModalMessage = document.getElementById('uiModalMessage');
 const uiModalInput = document.getElementById('uiModalInput');
-const uiModalSelect = document.getElementById('uiModalSelect');
 const uiModalOk = document.getElementById('uiModalOk');
 const uiModalCancel = document.getElementById('uiModalCancel');
 
-function openUIModal({ title = 'Mensaje', message = '', mode = 'alert', defaultValue = '', options = [] } = {}) {
+function openUIModal({ title = 'Mensaje', message = '', mode = 'alert', defaultValue = '' } = {}) {
     return new Promise(resolve => {
         uiModalTitle.textContent = title;
         uiModalMessage.textContent = message;
         uiModalInput.style.display = mode === 'prompt' ? 'block' : 'none';
         uiModalInput.value = mode === 'prompt' ? defaultValue : '';
-        uiModalSelect.style.display = mode === 'select' ? 'block' : 'none';
-        uiModalSelect.innerHTML = '';
-        if (mode === 'select') {
-            options.forEach((opt) => {
-                const option = document.createElement('option');
-                option.value = String(opt);
-                option.textContent = String(opt);
-                uiModalSelect.appendChild(option);
-            });
-        }
         uiModalCancel.style.display = mode === 'alert' ? 'none' : 'inline-flex';
         uiModal.classList.add('active');
         uiModal.setAttribute('aria-hidden', 'false');
@@ -3366,18 +2791,10 @@ function openUIModal({ title = 'Mensaje', message = '', mode = 'alert', defaultV
         const onKey = (e) => {
             if (!uiModal.classList.contains('active')) return;
             if (e.key === 'Escape') finish(mode === 'alert' ? true : (mode === 'confirm' ? false : null));
-            if (e.key === 'Enter') {
-                if (mode === 'prompt') finish(uiModalInput.value.trim() || null);
-                else if (mode === 'select') finish(uiModalSelect.value || null);
-                else finish(true);
-            }
+            if (e.key === 'Enter') finish(mode === 'prompt' ? (uiModalInput.value.trim() || null) : true);
         };
 
-        uiModalOk.onclick = () => {
-            if (mode === 'prompt') finish(uiModalInput.value.trim() || null);
-            else if (mode === 'select') finish(uiModalSelect.value || null);
-            else finish(true);
-        };
+        uiModalOk.onclick = () => finish(mode === 'prompt' ? (uiModalInput.value.trim() || null) : true);
         uiModalCancel.onclick = () => finish(mode === 'confirm' ? false : null);
         uiModal.onclick = (e) => {
             if (e.target === uiModal) finish(mode === 'confirm' ? false : null);
@@ -3386,7 +2803,6 @@ function openUIModal({ title = 'Mensaje', message = '', mode = 'alert', defaultV
 
         setTimeout(() => {
             if (mode === 'prompt') uiModalInput.focus();
-            else if (mode === 'select') uiModalSelect.focus();
             else uiModalOk.focus();
         }, 0);
     });
@@ -3402,12 +2818,6 @@ function uiConfirm(message, title = 'Confirmar') {
 
 function uiPrompt(message, defaultValue = '', title = 'Entrada') {
     return openUIModal({ title, message, mode: 'prompt', defaultValue });
-}
-
-function uiSelect(message, options = [], title = 'Selecciona una opción') {
-    const safe = Array.isArray(options) ? options : [];
-    if (!safe.length) return Promise.resolve(null);
-    return openUIModal({ title, message, mode: 'select', options: safe });
 }
     </script>
 </body>
