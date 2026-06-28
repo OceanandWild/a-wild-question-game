@@ -1,3 +1,6 @@
-window.addEventListener('DOMContentLoaded', () => {
-  // Reserved for future desktop bridge APIs.
+const { contextBridge } = require('electron');
+
+contextBridge.exposeInMainWorld('awqgDesktop', {
+  platform: process.platform,
+  isDesktop: true
 });

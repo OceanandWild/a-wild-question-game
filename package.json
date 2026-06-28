@@ -1,66 +1,49 @@
 {
   "name": "a-wild-question-game",
-  "version": "2026.3.5-t0015",
-  "description": "A Wild Question Game - Android and Windows",
+  "productName": "A Wild Question Game",
+  "version": "2026.6.27-t1500",
+  "description": "A Wild Question Game - Ocean and Wild Studios",
   "main": "main.js",
   "author": "Ocean and Wild Studios",
   "license": "MIT",
-  "type": "commonjs",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win nsis --publish never",
-    "android:sync": "npx cap sync android",
-    "android:build:debug": "cd android && gradlew.bat assembleDebug"
-  },
-  "dependencies": {
-    "@capacitor/android": "^8.1.0",
-    "@capacitor/cli": "^8.1.0",
-    "@capacitor/core": "^8.1.0"
+    "dist": "electron-builder --win nsis",
+    "dist:nsis": "electron-builder --win nsis --publish never",
+    "dist:dir": "electron-builder --win dir"
   },
   "devDependencies": {
-    "electron": "^28.0.0",
-    "electron-builder": "^24.13.3"
+    "electron": "^37.3.1",
+    "electron-builder": "^26.0.12"
   },
   "build": {
     "appId": "com.oceanandwild.awqg",
-    "detectUpdateChannel": false,
     "productName": "A Wild Question Game",
     "directories": {
-      "output": "C:/builds/awqg",
-      "buildResources": "build"
-    },
-    "publish": {
-      "provider": "generic",
-      "url": "https://github.com/OceanandWild/a-wild-question-game/releases/latest/download"
+      "output": "C:/builds/a-wild-question-game"
     },
     "files": [
+      "index.html",
       "main.js",
       "preload.js",
-      "index.html",
-      "build/awqgicon.ico",
-      "build/awqgicon.png"
+      "build/**/*"
     ],
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64"
-          ]
+          "arch": ["x64"]
         }
       ],
-      "icon": "build/awqgicon.ico",
-      "executableName": "A Wild Question Game"
+      "icon": "build/awqgicon.ico"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "artifactName": "A.Wild.Question.Game.Setup.${version}.exe",
-      "installerIcon": "build/awqgicon.ico",
-      "uninstallerIcon": "build/awqgicon.ico",
+      "artifactName": "AWQG-Setup-${version}.${ext}",
+      "shortcutName": "A Wild Question Game",
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "A Wild Question Game"
+      "createStartMenuShortcut": true
     }
   }
 }
