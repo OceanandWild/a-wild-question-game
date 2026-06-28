@@ -2100,13 +2100,13 @@ function renderCharacters(filterQuery) {
         
         const traits = Object.entries(character.traits).slice(0, 3);
         const traitsHtml = traits.map(([key, value]) => 
-            <div><strong>:</strong> </div>
+            `<div><strong>${key}:</strong> ${value}</div>`
         ).join('');
         
-        card.innerHTML = 
-            <div class="character-name"></div>
-            <div class="character-traits"></div>
-        ;
+        card.innerHTML = `
+            <div class="character-name">${character.name}</div>
+            <div class="character-traits">${traitsHtml}</div>
+        `;
         
         grid.appendChild(card);
     });
@@ -2226,9 +2226,6 @@ function autoEliminateForAsker(trait, value, answer){
 function consumeQuestion(){
     gameState.questionsLeftThisTurn--;
     updateQuestionCountBadge();
-    if(gameState.questionsLeftThisTurn <= 0){
-        endTurn();
-    }
     if (gameState.availableQuestions.length === 0) {
         // Se agotaron todas las preguntas — empate
         showEventToast('¡Se agotaron todas las preguntas! Termina el turno actual para llegar al empate.', 'Sin preguntas');
@@ -2237,6 +2234,9 @@ function consumeQuestion(){
         if (qBtn) qBtn.style.display = 'none';
         // Forzar fin de turno cuando el jugador termine de responder la pregunta actual
         gameState.questionsLeftThisTurn = 0;
+    }
+    if(gameState.questionsLeftThisTurn <= 0){
+        endTurn();
     }
 }
 function updateQuestionCountBadge(){
@@ -2628,7 +2628,7 @@ async function guessCharacter(){
         await uiAlert(`❌ Incorrecto. El personaje no era "${guess}".`, 'Intento fallido');
         endTurn();
     }
-}}
+}
 
 async function backToMenu() {
     const ok = await uiConfirm('¿Estás seguro de que quieres volver al menú principal? Se perderá el progreso actual.', 'Volver al menú');
